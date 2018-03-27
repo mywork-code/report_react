@@ -1,0 +1,148 @@
+.user-login{
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	background: rgba(240,240,240,1);
+	user-select: none;
+	.user-login-content{
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin: auto;
+		padding: 20px 20px 0 20px;
+		width: 400px;
+		height: 530px;
+		background: #fff;
+		.title{
+			margin-bottom: 12px;
+			width: 70px;
+			height: 33px;
+			line-height: 33px;
+			font-weight: lighter;
+			font-size: 24px;
+			color: #2E2E2E;
+			letter-spacing: 0;
+		}
+		.input-text{
+			display: block;
+			margin-top: 18px;
+			padding: 11px 15px;
+			width: 360px;
+			height: 42px;
+			line-height: 42px;
+			border: 1px solid rgba(219,222,221,1);
+			font-size: 14px;
+			text-align: left;
+			box-sizing: border-box;
+		}
+		.input-text:focus{
+			border: 1px solid rgba(0,165,119,1);
+		}
+		.forget-pass{
+			display: block;
+			margin-top: 15px;
+			width: 150px;
+			height: 20px;
+			line-height: 20px;
+			font-size: 14px;
+			color: #4621FF;
+			letter-spacing: 0;
+			cursor: pointer;
+		}
+		.submit{
+			background: rgba(0,165,119,1);
+			margin-top: 18px;
+		}
+		.remember-content{
+			margin-top: 15px;
+			.icon{
+				color: #dddddd;
+				font-size: 14px;
+				margin-right: 11px;
+				cursor: pointer;
+			}
+			.icon.active{
+				color: #2591FF;
+			}
+			.desc{
+				width: 68px;
+				height: 14px;
+				line-height: 14px;
+				font-size: 10px;
+				color: #2E2E2E;
+				letter-spacing: 0;
+				font-weight: lighter;
+			}
+		}
+		.spin{
+			margin-top: 13px;
+			padding: 0 16px;
+			display: flex;
+			.line-flex{
+				flex: 1;
+				border-top:1px solid #EEEEEE;
+				margin-top: 6px;
+			}
+			.desc{
+				margin: 0 9px;
+				flex: 0 0 9px;
+				width: 9px;
+				height: 14px;
+				font-size: 12px;
+				line-height: 14px;
+				color: #2E2E2E;
+			}
+		}
+		.login-facebook{
+			margin-top: 20px;
+			background: #3A509C;
+			margin-bottom: 10px;
+		}
+		.desc-facebook{
+			display: block;
+			width: 358px;
+			height: 17px;
+			line-height: 17px;
+			font-size: 12px;
+			color: #2E2E2E;
+			letter-spacing: 0;
+			margin-bottom: 44px;
+		}
+		.footer{
+			padding: 0;
+			border-top: 1px solid rgba(219,222,221,0.2);
+			height: 70px;
+			line-height: 70px;
+			text-align: center;
+			.sign-up{
+				color: #4621FF;
+				cursor: pointer;
+			}
+		}
+	}
+}
+/*按钮样式*/
+.btn{
+	width: 360px;
+	height: 42px;
+	line-height: 42px;
+	font-size: 18px;
+	text-align: center;
+	color: #fff;
+	font-weight: lighter;
+}
+/*placeholder样式*/
+input::-webkit-input-placeholder{
+	color:rgba(169,169,169,1);
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+	color:rgba(169,169,169,1);
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+	color:rgba(169,169,169,1);
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+	color:rgba(169,169,169,1);
+}

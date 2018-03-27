@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import request from 'superagent';
-import WebStorageCache from 'web-storage-cache'; // 文档 https://github.com/WQTeam/web-storage-cache
+//import WebStorageCache from 'web-storage-cache'; // 文档 https://github.com/WQTeam/web-storage-cache
+
+const WebStorageCache = { };
 class PageBase extends React.Component {
   constructor(props) {
     super(props);
