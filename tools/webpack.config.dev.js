@@ -6,13 +6,14 @@ const autoprefixer = require('autoprefixer');
 const paths = require('./paths');
 
 
-console.log(paths.appIndexJs);
 
 const config = {
 	// context: path.resolve(__dirname, "../"),
 	// 如果您希望在DevTools中查看编译后的输出，您可能需要'eval'。
 	devtool: 'cheap-module-source-map',
+  mode: 'development',
   entry: [
+    require.resolve('react-dev-utils/webpackHotDevClient'),
     paths.appIndexJs,
   ],
   output: {
@@ -41,12 +42,6 @@ const config = {
     modules: [paths.appNodeModules],
     // 自动解析确定的扩展
     extensions: ['.js', '.json','.jsx'],
-   
-   /* alias: {
-      'react': path.resolve(paths.appNodeModules, 'react/umd/react.production.min.js'),
-      'react-dom': path.resolve(paths.appNodeModules, 'react-dom/umd/react-dom.production.min.js'),
-      'react-router-dom': path.resolve(paths.appNodeModules, 'react-router-dom/umd/react-router-dom.min.js'),
-    },*/
   },
   module: {
   	strictExportPresence: true,

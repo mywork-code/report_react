@@ -5,9 +5,7 @@ import {
   Route,
   // Link
 } from 'react-router-dom'
-import {
-  AppContainer
-} from '../src/core/app/AppContainer.js';
+import AppContainer  from '../src/core/app/AppContainer.js';
 
 import '../public/css/reset.css';
 import '../public/font/iconfont.css';
