@@ -1,14 +1,21 @@
 import React from 'react';
-import PageBase  from '../../src/core/app/PageBase.js';
+import Ayobase  from '../../src';
 import './UserLogin.css';
 
+const {
+  PageBase,
+} = Ayobase;
 class UserLogin extends PageBase {
   constructor(props) {
     super(props);
   }
 
+  testClick = () => {
+  	console.log(Ayobase);
+  }
+
   render() {
-  	return(<div className="user-login"><h1>fuck dssfhhdoifu</h1></div>)
+  	return(<div className="user-login"><h1 onClick={this.testClick}>fuck dssfhhdoifu</h1></div>)
   }
 }
  

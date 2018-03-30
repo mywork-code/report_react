@@ -5,8 +5,10 @@ import {
   Route,
   // Link
 } from 'react-router-dom'
-import AppContainer  from '../src/core/app/AppContainer.js';
-
+import Ayobase  from '../src';
+const {
+  AppContainer,
+} = Ayobase;
 import '../public/css/reset.css';
 import '../public/font/iconfont.css';
 import UserLogin from './UserLogin';
