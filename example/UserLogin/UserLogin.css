@@ -1,5 +1,18 @@
 .user-login{
-	 h1 {
-	 	color: red;
-	 }
-	 }
+	h1 {
+	  color: red;
+	}
+
+	.fictitious-keyboard {
+		width: 100%;
+		table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 5px 10px;
+    text-align: center;
+		td {
+			border: 1px solid red;
+			border-radius: 5px;
+			vertical-align: middle;
+		}
+	}
+}

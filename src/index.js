@@ -12,6 +12,7 @@ const Ayobase = {
   PageBase,
   LocalCache,
   SessionCache,
+  HttpClient,
 };
 
 module.exports = Ayobase;

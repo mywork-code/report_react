@@ -1,5 +1,5 @@
 import AbstractCache from '../storages/AbstractCache';
-import LocalStore from '../storages/SessionStore';
+import SessionStore from '../storages/SessionStore';
 
 /**
  * SessionCache
