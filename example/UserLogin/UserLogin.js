@@ -13,7 +13,7 @@ class UserLogin extends PageBase {
   testClick = () => {
   	//console.log(Ayobase);
 
-    BenefitData.set({
+    BenefitData.set("key",{
       fuck: 1
     })
   }
