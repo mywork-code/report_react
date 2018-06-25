@@ -1,5 +1,5 @@
 import React from 'react';
-import Ayobase  from '../../src';
+import Ayobase  from '../../core';
 import './UserLogin.css';
 import BenefitData from '../data/testData';
 const {

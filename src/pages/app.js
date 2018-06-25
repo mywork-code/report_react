@@ -5,12 +5,12 @@ import {
   Route,
   // Link
 } from 'react-router-dom'
-import Ayobase  from '../src';
+import Ayobase  from '../core';
 const {
   AppContainer,
 } = Ayobase;
-import '../public/css/reset.css';
-import '../public/font/iconfont.css';
+import '../../public/css/reset.css';
+import '../../public/font/iconfont.css';
 import UserLogin from './UserLogin';
  
 const App = ()=> {

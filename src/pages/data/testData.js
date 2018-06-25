@@ -1,4 +1,4 @@
-import Ayobase  from '../../src';
+import Ayobase  from '../../core';
 const {
   SessionCache,
 } = Ayobase;

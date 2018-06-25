@@ -13,7 +13,7 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const env = getClientEnvironment('/');
 const shouldUseSourceMap = true;
-const publicPath = 'http://localhost:3000';
+const publicPath = 'http://localhost:3000/';
 
 const config = {
   mode: "production",
@@ -23,7 +23,8 @@ const config = {
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
   entry: {
-    ayobase: [paths.appSrc]
+    // ayobase: [paths.appSrc],
+    appIndex: [paths.appIndexJs]
   },
   output: {
     // The build folder.
