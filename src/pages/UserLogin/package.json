@@ -1,6 +1,0 @@
-{
-  "name": "UserLogin",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./UserLogin.js"
-}
