@@ -10,12 +10,13 @@
 	color: #999;
 	background-color: #d0d0d0;
 
-	.icon-des {
-		font-size: 1rem;
-	
-	}
+}
 
-	.active {
-		color: #2772ff;
-	}
+.footer-group .icon-des {
+  font-size: 1rem;
+
+}
+
+.footer-group .active {
+  color: #2772ff;
 }

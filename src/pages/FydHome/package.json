@@ -1,0 +1,6 @@
+{
+  "name": "FydHome",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./FydHome.js"
+}
