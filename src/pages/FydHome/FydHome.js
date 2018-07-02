@@ -1,39 +1,47 @@
 import React from 'react';
-import AyoBase  from '../../core';
+import AyoBase from '../../core';
 import './FydHome.css';
 import BenefitData from '../data/testData';
-import Footer from '../../component/Footer';
-import Header from '../../component/Header';
+import {Tabs} from 'antd'
+import YunYingRi from "../../component/YunyingRi/YunYingRi";
+
+const TabPane = Tabs.TabPane;
+
 const {
   PageBase,
 } = AyoBase;
 
 class FydHome extends PageBase {
-  constructor(props) {
-    super(props);
+  constructor(){
+    super();
+    this.state = {
+      mode:'top'
+    }
   }
-
-  testClick = () => {
-  	console.log(AyoBase);
-
-    BenefitData.set("key",{
-      fuck: 1
-    })
+  componentWillMount(){
+    console.log(111);
+    console.log(this.getQuery())
   }
-
-  getSeesionData = () => {
+  handleModeChange(){
+    console.log(111)
+    BenefitData.set({a:1,b:2});
     console.log(BenefitData.get());
   }
 
   render() {
-  	return(
-  	  <div className="user-home">
-          <div className="fyd-icon" onClick={this.testClick}>
-            <img src='http://www.wwtliu.com///sxtstu///blueberrypai///indexImg///banner1.jpg' />
-          </div>
-          <div className="fyd-title">房易贷</div>
-          <div className="ajqh-icon"><img src='http://www.wwtliu.com///sxtstu///blueberrypai///indexImg///banner2.jpg' /></div>
-          <div className="ajqh-title">安家趣花</div>
+    return (
+      <div>
+        <Tabs onChange={this.handleModeChange}
+          defaultActiveKey="1"
+          tabPosition={this.state.mode}
+        >
+          <TabPane tab="运营日报表" key="1">
+            <YunYingRi/>
+          </TabPane>
+          <TabPane tab="地区监控表" key="2">Content of tab 2</TabPane>
+          <TabPane tab="运营明细表" key="3">Content of tab 3</TabPane>
+          <TabPane tab="用户属性分析表" key="4">Content of tab 4</TabPane>
+        </Tabs>
       </div>
     )
   }

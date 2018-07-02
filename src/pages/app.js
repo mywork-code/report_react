@@ -1,25 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MediaQuery from 'react-responsive';
+import 'antd/dist/antd.css';
+
+
 import {
   HashRouter as Router,
   Route,
-  // Link
 } from 'react-router-dom'
 import AyoBase  from '../core';
 import '../../public/css/reset.css';
 import '../../public/font/iconfont.css';
-import UserLogin from './UserLogin';
-import FydHome from './FydHome';
+import Home from './Home/Home';
+import FydHome from "./FydHome";
 
 const {
   AppContainer,
 } = AyoBase;
 
 const App = ()=> {
-  return (<Router><AppContainer>
-      <Route exact path="/" component={FydHome}/>
-      <Route exact path="user-login" component={UserLogin}/>
-  </AppContainer></Router>)
+  return (
+    <Router>
+      <AppContainer>
+        <MediaQuery query="(min-device-width: 1224px)">
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/home" component={Home}/>
+            <Route exact path="/fyd-home" component={FydHome}/>
+        </MediaQuery>
+
+        <MediaQuery query="(max-device-width: 1224px)">
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/home" component={Home}/>
+            <Route exact path="/fyd-home" component={FydHome}/>
+        </MediaQuery>
+      </AppContainer>
+    </Router>)
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));

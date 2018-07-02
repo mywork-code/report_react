@@ -4,7 +4,7 @@ import HttpClient from './http/HttpClient';
 import LocalCache from './data/cache/LocalCache';
 import SessionCache from './data/cache/SessionCache';
 
-const Ayobase = {
+const AyoBase = {
   AppContainer,
   PageBase,
   LocalCache,
@@ -12,4 +12,4 @@ const Ayobase = {
   HttpClient,
 };
 
-module.exports = Ayobase;
+module.exports = AyoBase;
