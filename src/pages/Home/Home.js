@@ -26,11 +26,6 @@ class Home extends PageBase {
     //   }
     // })
 
-    HttpClient.get({
-      url: 'http://newsapi.gugujiankong.com/Handler.ashx?action=getnews&type=top&count=10',
-    }, (data) => {
-      console.log(data);
-    });
   }
   toFydHome = ()=>{
     //demo传参

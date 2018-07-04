@@ -23,7 +23,7 @@ class BrowserHttpClient {
 	static get(options, succ, fail) {
     request
       .get(options.url)
-      .set('X-Requested-With', 'XMLHttpRequest')
+      // .set('X-Requested-With', 'XMLHttpRequest')
       .query(options.query || {})
       .accept('*/*')
       .timeout(30000)
@@ -42,7 +42,7 @@ class BrowserHttpClient {
   static post(options, succ, fail) {
     request
       .post(options.url)
-      .set('X-Requested-With', 'XMLHttpRequest')
+      // .set('X-Requested-With', 'XMLHttpRequest')
       .query(options.query || {})
       .type('form')
       .accept('*/*')

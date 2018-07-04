@@ -15,16 +15,17 @@ class FydHome extends PageBase {
   constructor(){
     super();
     this.state = {
-      mode:'top'
+
     }
   }
   componentWillMount(){
-    console.log(111);
-    console.log(this.getQuery())
+    // console.log(this.getQuery())
   }
   handleModeChange(){
-    console.log(111)
+    //存储数据至本地
     BenefitData.set({a:1,b:2});
+
+    //从本地获取数据
     console.log(BenefitData.get());
   }
 
@@ -33,7 +34,6 @@ class FydHome extends PageBase {
       <div>
         <Tabs onChange={this.handleModeChange}
           defaultActiveKey="1"
-          tabPosition={this.state.mode}
         >
           <TabPane tab="运营日报表" key="1">
             <YunYingRi/>
