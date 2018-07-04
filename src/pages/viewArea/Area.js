@@ -3,21 +3,26 @@ import AyoBase from '../../core';
 import ReactEcharts from 'echarts-for-react';
 import "./Area.css";
 import mock from './mock';
+import AreaTable from '../../component/AreaTable/AreaTable'
 
 require('echarts/map/js/china.js');
 
-const { PageBase } = AyoBase;
+const {PageBase} = AyoBase;
 
 
-class Area extends PageBase{
-  constructor(props){
+class Area extends PageBase {
+  constructor(props) {
     super(props);
-    this.state = {option:mock.mockOption()}
+    this.state = {
+      option: mock.mockOption(),
+      dataSource:mock.tableDate().dataSource,
+      columns:mock.tableDate().columns,
+    }
 
     console.log(this.state.option);
   }
 
-  render(){
+  render() {
     return (
       <div className="area-box">
         <div className="area-top">
@@ -25,9 +30,7 @@ class Area extends PageBase{
             option={this.state.option}
             className='react_for_echarts'/>
         </div>
-        <div className="area-bottom">
-
-        </div>
+        <AreaTable columns={this.state.columns} />
       </div>
     )
   }

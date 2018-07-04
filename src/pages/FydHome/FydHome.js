@@ -13,18 +13,18 @@ const {
 } = AyoBase;
 
 class FydHome extends PageBase {
-  constructor(){
+  constructor() {
     super();
-    this.state = {
-
-    }
+    this.state = {}
   }
-  componentWillMount(){
+
+  componentWillMount() {
     // console.log(this.getQuery())
   }
-  handleModeChange(){
+
+  handleModeChange() {
     //存储数据至本地
-    BenefitData.set({a:1,b:2});
+    BenefitData.set({a: 1, b: 2});
 
     //从本地获取数据
     console.log(BenefitData.get());
@@ -34,7 +34,8 @@ class FydHome extends PageBase {
     return (
       <div>
         <Tabs onChange={this.handleModeChange}
-          defaultActiveKey="1"
+              defaultActiveKey="1"
+              tabBarStyle={{marginBottom:0}}
         >
           <TabPane tab="运营日报表" key="1">
             <YunYingRi/>
