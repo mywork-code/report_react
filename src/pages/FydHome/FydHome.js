@@ -5,6 +5,7 @@ import BenefitData from '../data/testData';
 import {Tabs} from 'antd'
 import YunYingRi from "../YunyingRi/YunYingRi";
 import Area from "../viewArea/Area"
+import UserAttr from "../UserAttr/UserAttr"
 
 const TabPane = Tabs.TabPane;
 
@@ -43,7 +44,9 @@ class FydHome extends PageBase {
             <Area/>
           </TabPane>
           <TabPane tab="运营明细表" key="3">Content of tab 3</TabPane>
-          <TabPane tab="用户属性分析表" key="4">Content of tab 4</TabPane>
+          <TabPane tab="用户属性分析表" key="4">
+            <UserAttr/>
+          </TabPane>
         </Tabs>
       </div>
     )
