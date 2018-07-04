@@ -3,7 +3,7 @@ import AyoBase from '../../core';
 import './FydHome.css';
 import BenefitData from '../data/testData';
 import {Tabs} from 'antd'
-import YunYingRi from "../../component/YunyingRi/YunYingRi";
+import YunYingRi from "../YunyingRi/YunYingRi";
 import Area from "../viewArea/Area"
 
 const TabPane = Tabs.TabPane;

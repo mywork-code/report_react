@@ -1,5 +1,5 @@
 import React from 'react';
-import AyoBase from '../../core';
+import AyoBase from '../../core/index';
 import './YunYingRi.css';
 import {Row,Col,Modal} from 'antd'
 import {getDemo,getOption} from './YunyingRiData'
