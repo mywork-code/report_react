@@ -1,6 +1,6 @@
 const MarrOption = {
   title : {
-    text: '用户婚姻结构',
+    text: '用户婚姻分布',
     x:'center'
   },
   tooltip : {

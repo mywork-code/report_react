@@ -97,7 +97,7 @@ class OperatingDetail extends PageBase {
               <div className="row-cell weight">老用户贷款人数</div>
           </div>
           <div className="detail-row">
-              <div className="row-cell weight">2018..07.05</div>
+              <div className="row-cell weight">2018.07.05</div>
               <div className="row-cell weight">1000</div>
               <div className="row-cell weight">1000</div>
               <div className="row-cell weight">1000</div>
@@ -126,8 +126,7 @@ class OperatingDetail extends PageBase {
               <div className="row-cell weight">新用户贷款金额</div>
               <div className="row-cell weight">老用户贷款金额</div>
               <div className="row-cell weight">老用户贷款人数</div>
-          </div>          
-  
+          </div>
 
 
       </div>
