@@ -13,6 +13,9 @@ import '../../public/css/reset.css';
 import '../../public/font/iconfont.css';
 import Home from './Home/Home';
 import FydHome from "./FydHome";
+import AjqhHome from "./AjqhHome";
+import OperatingDetail from "./OperatingDetail";
+
 
 const {
   AppContainer,
@@ -26,12 +29,16 @@ const App = ()=> {
             <Route exact path="/" component={Home}/>
             <Route exact path="/home" component={Home}/>
             <Route exact path="/fyd-home" component={FydHome}/>
+            <Route exact path="/ajqh-home" component={AjqhHome}/>
+            <Route exact path="/operating-detail" component={OperatingDetail}/>
         </MediaQuery>
 
         <MediaQuery query="(max-device-width: 1224px)">
             <Route exact path="/" component={Home}/>
             <Route exact path="/home" component={Home}/>
             <Route exact path="/fyd-home" component={FydHome}/>
+            <Route exact path="/ajqh-home" component={AjqhHome}/>
+            <Route exact path="/operating-detail" component={OperatingDetail}/>
         </MediaQuery>
       </AppContainer>
     </Router>)
