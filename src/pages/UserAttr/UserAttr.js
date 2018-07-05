@@ -12,9 +12,7 @@ const { PageBase } = AyoBase;
 class UserAttr extends PageBase{
   constructor(props){
     super(props);
-    this.state = {MaleFemale:UserMaleFemaleRatio.MaleFemaleOption}
-    //this.state = {Age:UserAge.AgeOption}
-    this.state = {Marr:UserMarr.MarrOption}
+    this.state = {MaleFemale:UserMaleFemaleRatio.MaleFemaleOption ,Age:UserAge.AgeOption,Marr:UserMarr.MarrOption}
 
 
   }
@@ -25,9 +23,9 @@ class UserAttr extends PageBase{
           <ReactEcharts
             option={this.state.MaleFemale}
           />
-          {/*<ReactEcharts*/}
-            {/*option={this.state.Age}*/}
-            {/*/>*/}
+          <ReactEcharts
+            option={this.state.Age}
+            />
           <ReactEcharts
             option={this.state.Marr}
           />
