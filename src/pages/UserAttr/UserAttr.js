@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
-import UserAttrData from './UserAttrData'
+import UserAge from './UserAge'
+import UserMarr from './UserMarriage';
+
+import UserMaleFemaleRatio from './UserMaleFemaleRatio';
+
 import AyoBase from '../../core/index';
 const { PageBase } = AyoBase;
 
@@ -8,7 +12,10 @@ const { PageBase } = AyoBase;
 class UserAttr extends PageBase{
   constructor(props){
     super(props);
-    this.state = {option:UserAttrData.option}
+    this.state = {MaleFemale:UserMaleFemaleRatio.MaleFemaleOption}
+    //this.state = {Age:UserAge.AgeOption}
+    this.state = {Marr:UserMarr.MarrOption}
+
 
   }
 
@@ -16,8 +23,15 @@ class UserAttr extends PageBase{
     return (
         <div className="UserAttr">
           <ReactEcharts
-            option={this.state.option}
-            />
+            option={this.state.MaleFemale}
+          />
+          {/*<ReactEcharts*/}
+            {/*option={this.state.Age}*/}
+            {/*/>*/}
+          <ReactEcharts
+            option={this.state.Marr}
+          />
+
         </div>
 
     )

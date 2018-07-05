@@ -1,5 +1,10 @@
 
-const option = {
+const AgeOption = {
+  title : {
+    text: '用户年龄分布(%)',
+    x:'center'
+  },
+
   tooltip: {
     trigger: 'item',
     formatter: "{a} <br/>{b}: {c} ({d}%)"
@@ -7,11 +12,11 @@ const option = {
   legend: {
     orient: 'vertical',
     x: 'left',
-    data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+    data:['20-29','30-39','40-49','50-55']
   },
   series: [
     {
-      name:'访问来源',
+      name:'年龄分布',
       type:'pie',
       radius: ['50%', '70%'],
       avoidLabelOverlap: false,
@@ -34,11 +39,10 @@ const option = {
         }
       },
       data:[
-        {value:335, name:'直接访问'},
-        {value:310, name:'邮件营销'},
-        {value:234, name:'联盟广告'},
-        {value:135, name:'视频广告'},
-        {value:1548, name:'搜索引擎'}
+        {value:335, name:'20-29'},
+        {value:310, name:'30-39'},
+        {value:234, name:'40-49'},
+        {value:135, name:'50-55'},
       ]
     }
   ]
@@ -46,6 +50,6 @@ const option = {
 
 
 module.exports = {
-  option
+  AgeOption
 }
 
