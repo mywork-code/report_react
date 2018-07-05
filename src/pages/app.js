@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import MediaQuery from 'react-responsive';
 import 'antd/dist/antd.css';
 
-import Area from './viewArea/Area'
-
-
 import {
   HashRouter as Router,
   Route,
@@ -46,4 +43,4 @@ const App = ()=> {
     </Router>)
 }
 
-ReactDOM.render(<Area />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

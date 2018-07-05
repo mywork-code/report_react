@@ -385,14 +385,6 @@ const tableDate = () => {
         withdrawRate:'30%'
 
       },
-
-
-
-
-
-
-
-
     ],
     columns: [
       {
@@ -470,8 +462,80 @@ const tableDate = () => {
   }
 }
 
+const filterData = () => {
+  return [
+    {
+      groupTitle:'授信环节',
+      groupId:'creditStep',
+      haveSelect:true,
+      child:[
+        {
+          value:'所在地区',
+          isCheck:true,
+        },
+        {
+          value:'有效注册人数',
+          isCheck:true,
+        },
+        {
+          value:'手机认证数',
+          isCheck:true,
+        }
+      ]
+    },
+    {
+      groupTitle:'决策-提现环节',
+      groupId:'withdrawStep',
+      haveSelect:true,
+      child:[
+        {
+          value:'决策完成数',
+          isCheck:true,
+        },
+        {
+          value:'决策通过数',
+          isCheck:true,
+        },
+        {
+          value:'提现人数',
+          isCheck:true,
+        },
+        {
+          value:'提现通过人数',
+          isCheck:true,
+        },
+        {
+          value:'电审人数',
+          isCheck:true,
+        },
+        {
+          value:'电审通过人数',
+          isCheck:true,
+        },
+        {
+          value:'签约金额',
+          isCheck:true,
+        },
+        {
+          value:'决策完成率',
+          isCheck:true,
+        },
+        {
+          value:'决策通过率',
+          isCheck:true,
+        },
+        {
+          value:'提现率',
+          isCheck:true,
+        },
+      ]
+    }
+  ]
+}
+
 
 module.exports = {
   mockOption,
-  tableDate
+  tableDate,
+  filterData
 }
