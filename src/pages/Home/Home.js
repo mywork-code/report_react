@@ -37,6 +37,16 @@ class Home extends PageBase {
     })
 
   }
+  toAjqhHome = ()=>{
+      //demo传参
+      this.forward('ajqh-home',{
+        query:{
+          a:1,
+          b:2
+        }
+      })
+
+    }
 
 
   render() {
@@ -50,7 +60,7 @@ class Home extends PageBase {
               </div>
               <div className="fyd-title">房易贷</div>
 
-              <div className="ajqh-icon">
+              <div className="ajqh-icon" onClick={this.toAjqhHome}>
                 <img src='http://www.wwtliu.com///sxtstu///blueberrypai///indexImg///banner2.jpg'/>
               </div>
               <div className="ajqh-title">安家趣花</div>
