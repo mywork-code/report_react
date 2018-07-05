@@ -44,10 +44,10 @@
   color: #303030;
 }
 .detail-row:nth-child(even) {
-   background: #fff;  
+  background: #F9F9F9;
 }
 .detail-row:nth-child(odd) {
-   background: #F9F9F9;
+  background: #fff;  
 }
 .operation-box {
   background: #fff;

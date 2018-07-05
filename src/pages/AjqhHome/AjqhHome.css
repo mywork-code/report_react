@@ -97,3 +97,22 @@
 .operation-row:nth-child(odd) {
    background: #F9F9F9;
 }
+.operation-title {
+    width: 100%;
+    height: 44px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #484848;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.operation-title img {
+  position: absolute;
+  right: 18px;
+  top: 15px;
+  width: 7px;
+  height: 14px;
+}

@@ -46,7 +46,7 @@ class FydHome extends PageBase {
     console.log('tab切换')
   }
   viewDetails(event) {
-  
+
     event.target.parentNode.style.backgroundColor="#E0E0E0";
     // setTimeout(function(){
     //   event.target.parentNode.style.backgroundColor="#E0E0E0";
@@ -73,8 +73,10 @@ class FydHome extends PageBase {
           <div className="ajqh-tabs">
               <div className="tabs-cell"><span  onClick={this.handleClick} className="isClick">电商运营报表</span></div>
               <div className="tabs-cell"><span  onClick={this.handleClick} className="">贷超流量监控表</span></div>
-
-          </div>      
+          </div>
+          <div className="operation-title">趋势图  
+              <img src='http://www.wwtliu.com///sxtstu///blueberrypai///indexImg///banner1.jpg'/>
+          </div>          
           <div className="area-top">
             <ReactEcharts
               option={this.state.option}
