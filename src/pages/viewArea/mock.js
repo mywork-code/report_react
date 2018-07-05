@@ -86,88 +86,384 @@ const mockOption = () => {
 const tableDate = () => {
   return {
     dataSource: [
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+      {
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },{
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },{
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },{
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },{
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },{
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },{
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },{
+        date: '5月1号',
+        region: '安徽',
+        effectiveRegisterNum:'1',
+        phoneAuthNum:'2',
+        decisionCompletionNum:"3",
+        decisionPassNum:'4',
+        withdrawNum:'5',
+        withdrawPassNum:'6',
+        phoneReviewNum:'7',
+        phoneReviewPassNum:'8',
+        signMoney:'9',
+        decisionCompletionRate:'10%',
+        decisionPassRate:'20%',
+        withdrawRate:'30%'
+
+      },
+
+
+
+
+
+
+
+
     ],
     columns: [
+      {
+        title: '日期',
+        dataIndex: 'date',
+        key: 'date',
+      },
       {
         title: '所在地区',
         dataIndex: 'region',
         key: 'region',
-        align:"center",
-        width:"100px",
       },
       {
         title: '有效注册人数',
         dataIndex: 'effectiveRegisterNum',
         key: 'effectiveRegisterNum',
-        align:"center",
-        width:"150px",
       },
       {
         title: '手机认证数',
         dataIndex: 'phoneAuthNum',
         key: 'phoneAuthNum',
-        align:"center",
-        width:"150px",
       },
       {
         title: '决策完成数',
         dataIndex: 'decisionCompletionNum',
         key: 'decisionCompletionNum',
-        align:"center",
       },
       {
         title: '决策通过数',
         dataIndex: 'decisionPassNum',
         key: 'decisionPassNum',
-        align:"center",
       },
       {
         title: '提现人数',
         dataIndex: 'withdrawNum',
         key: 'withdrawNum',
-        align:"center",
       },
       {
         title: '提现通过人数',
         dataIndex: 'withdrawPassNum',
         key: 'withdrawPassNum',
-        align:"center",
       },
       {
         title: '电审人数',
         dataIndex: 'phoneReviewNum',
         key: 'phoneReviewNum',
-        align:"center",
       },
       {
         title: '电审通过人数',
         dataIndex: 'phoneReviewPassNum',
         key: 'phoneReviewPassNum',
-        align:"center",
       },
       {
         title: '签约金额',
         dataIndex: 'signMoney',
         key: 'signMoney',
-        align:"center",
       },
       {
         title: '决策完成率',
         dataIndex: 'decisionCompletionRate',
         key: 'decisionCompletionRate',
-        align:"center",
       },
       {
         title: '决策通过率',
         dataIndex: 'decisionPassRate',
         key: 'decisionPassRate',
-        align:"center",
       },
       {
         title: '提现率',
         dataIndex: 'withdrawRate',
         key: 'withdrawRate',
-        align:"center",
       },
     ]
 

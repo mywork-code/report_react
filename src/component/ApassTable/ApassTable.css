@@ -1,0 +1,25 @@
+
+.table-box{
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.cell{
+  display: block;
+  color: #303030;
+  font-size:15px;
+  line-height: 44px;
+  min-width: 45px;
+  height: 44px;
+  padding: 0 30px;
+}
+
+.big-box{
+  width: 3000px;
+}
+
+.cloumn{
+  float: left;
+  text-align: center;
+}
