@@ -14,7 +14,7 @@ import Home from './Home/Home';
 import FydHome from "./FydHome";
 import AjqhHome from "./AjqhHome";
 import OperatingDetail from "./OperatingDetail";
-
+import Area from "./viewArea/Area";
 
 const {
   AppContainer,
@@ -43,4 +43,4 @@ const App = ()=> {
     </Router>)
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Area />, document.getElementById('root'));

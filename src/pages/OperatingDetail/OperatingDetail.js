@@ -38,11 +38,25 @@ class OperatingDetail extends PageBase {
     },(resp) => {
       // 请求接口成功-赋值
       console.log(resp);
+      resp.forEach(item => {
+        if (item.reportDate > 0){
+          item.reportDateStr = that.fmtDate(item.reportDate)
+        }
+      })
+
       that.setState({
-        dataSource:mock.tableDate().dataSource,
+        dataSource:resp,
         columns:mock.tableDate().columns
       })
     })
+  }
+
+  fmtDate(obj){
+    var date =  new Date(obj);
+    var y = 1900+date.getYear();
+    var m = "0"+(date.getMonth()+1);
+    var d = "0"+date.getDate();
+    return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
   }
 
   render() {
