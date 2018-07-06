@@ -52,12 +52,6 @@ const tableDate = () => {
       },
       {
         title: '预审通过人数',
-        dataIndex: 'phoneReviewNum',
-        key: 'phoneReviewNum',
-        visiable:true,
-      },
-      {
-        title: '电审通过人数',
         dataIndex: 'auditPassCount',
         key: 'auditPassCount',
         visiable:true,
@@ -124,8 +118,8 @@ const tableDate = () => {
       },
       {
         title: '签约人数',
-        dataIndex: 'submitOrderCount	',
-        key: 'submitOrderCount	',
+        dataIndex: 'submitOrderCount',
+        key: 'submitOrderCount',
         visiable:true,
       },
       {
