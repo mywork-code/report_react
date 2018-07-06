@@ -21,7 +21,22 @@ class ApassHttpClicent{
       .send({ "h5Data": options.params })
       .timeout(30000)
       .end((err,resp) => {
-          console.log(err,resp);
+        if (err) {
+          fail && fail(err);
+          return;
+        }
+        if (resp && resp.body) {
+          if(resp.body.status == '1'){
+            suc(resp.body.data);
+          }else if(resp.body.status == '0'){
+              //TODO toast弱提示
+          }else if(esp.body.status == '-2'){
+             //TODO  重新登录
+          }else{
+            fail && fail({status:"-1000",msg:'服务器位置的状态码'});
+          }
+          return;
+        }
       });
 
   }

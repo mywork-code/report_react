@@ -51,6 +51,8 @@ class Area extends PageBase {
         "beDate": "2018-07-02",
         "afDate": "2018-07-04"
       }
+    },(resp) => {
+      console.log(resp);
     })
   }
 
