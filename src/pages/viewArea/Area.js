@@ -5,6 +5,7 @@ import "./Area.css";
 import mock from './mock';
 import ApassTable from '../../component/ApassTable/ApassTable'
 import ApassFilter from '../../component/ApassFilter/ApassFilter'
+import {Apis,ApassHttp} from '../../core/index';
 
 import ic_explain from '../../imgs/ic_explain.png'
 import ic_filter from '../../imgs/ic_filter.png'
@@ -42,6 +43,17 @@ class Area extends PageBase {
   }
 
 
+  componentDidMount(){
+    ApassHttp.post({
+      url:Apis.api.queryReport,
+      params:{
+        "type": "1",
+        "beDate": "2018-07-02",
+        "afDate": "2018-07-04"
+      }
+    })
+  }
+
   showExPlain = () => {
   }
 
@@ -55,6 +67,22 @@ class Area extends PageBase {
 
   filterComplete = () => {
     this.setState({filterVisiable: false});
+    var filterData = this.state.filterData;
+    var columns = this.state.columns;
+    filterData.map((data,bigIndex) => {
+        let offset = 0;
+        if(bigIndex != 0){
+          offset = filterData[bigIndex-1].child.length
+        }
+        data.child.map((col,index) => {
+          columns[index+offset+1].visiable = col.isCheck;
+        })
+    })
+
+    this.setState((prevState) => {
+      columns:prevState.columns
+    })
+
   }
 
   filterCellClick = (groupIndex,childIndex) => {

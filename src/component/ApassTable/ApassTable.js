@@ -5,22 +5,18 @@ import './ApassTable.css'
 class ApassTable extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      columns:props.columns,
-      dataSource:props.dataSource,
-    }
   }
 
   render() {
 
-    const columns = this.state.columns;
-    const dataSource = this.state.dataSource;
+    const columns = this.props.columns;
+    const dataSource = this.props.dataSource;
 
 
     let colsLength = columns.length;
     let dsLength = dataSource.length;
 
-    let colDiv = new Array(columns.length);
+    let colDiv = new Array();
 
     for(let i=0 ; i< colsLength ; i++){
 
@@ -36,8 +32,9 @@ class ApassTable extends React.Component {
       colDiv.push(colSpan);
     }
 
+
     var table = colDiv.map((data,index) =>{
-      return <div className="cloumn" key={"div"+index}>{data}</div>
+      return <div className="cloumn" key={"div"+index} style={columns[index].visiable ? {display:"block"} : {display:"none"}}>{data}</div>
     });
 
 
