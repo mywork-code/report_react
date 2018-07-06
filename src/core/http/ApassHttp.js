@@ -1,8 +1,8 @@
 import request from 'superagent';
 import encrypt from './encrypt';
 import Apis from './Apis';
-import BrowserHttpClient from "./BrowserHttpClient";
-
+import Toast from 'antd-mobile/lib/toast';
+import 'antd-mobile/lib/toast/style/css';
 
 class ApassHttpClicent{
 
@@ -29,9 +29,11 @@ class ApassHttpClicent{
           if(resp.body.status == '1'){
             suc(resp.body.data);
           }else if(resp.body.status == '0'){
-              //TODO toast弱提示
-          }else if(esp.body.status == '-2'){
+            if(resp.body.msg) Toast.info(resp.body.msg,1);
+          }else if(resp.body.status == '-2'){
              //TODO  重新登录
+
+
           }else{
             fail && fail({status:"-1000",msg:'服务器位置的状态码'});
           }
