@@ -15,7 +15,7 @@ class YunYingRi extends PageBase {
    constructor(props) {
      super(props);
      this.state = {
-        visible : true
+        visible : false
      };
    }
    componentDidMount(){
