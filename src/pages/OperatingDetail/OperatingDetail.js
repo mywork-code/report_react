@@ -16,6 +16,8 @@ class OperatingDetail extends PageBase {
     this.state = {
       dataSource: [],
       columns: [],
+      startDate:'',
+      endDate:''
     }
 
     console.log(this.state);
@@ -32,8 +34,8 @@ class OperatingDetail extends PageBase {
       url:Apis.api.queryReport,
       params:{
         "type": "1",
-        "beDate": "2018-07-02",
-        "afDate": "2018-07-04"
+        "beDate": this.state.startDate == ''?"2018-07-02":this.state.startDate,
+        "afDate": this.state.endDate == ''?"2018-07-04":this.state.endDate,
       }
     },(resp) => {
       // 请求接口成功-赋值
