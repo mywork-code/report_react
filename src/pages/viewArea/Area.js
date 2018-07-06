@@ -127,6 +127,7 @@ class Area extends PageBase {
         <ReactEcharts
           option={this.state.option}
           className='map'/>
+
         <AreaTitle title="各地区用户业务转化监控" leftClick={this.showExPlain} rightClick={this.showFilter}/>
         <ApassTable dataSource={this.state.dataSource} columns={this.state.columns}/>
         <ApassFilter title="维度指标配置" filterData={this.state.filterData}
