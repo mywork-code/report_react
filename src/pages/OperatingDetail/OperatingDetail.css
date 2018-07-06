@@ -47,9 +47,8 @@
   background: #F9F9F9;
 }
 .detail-row:nth-child(odd) {
-  background: #fff;  
+  background: #fff;
 }
 .operation-box {
   background: #fff;
-  overflow: scroll;
 }
