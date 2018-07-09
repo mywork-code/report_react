@@ -44,11 +44,13 @@ class FydHome extends PageBase {
   handleModeChange = (activeKey) => {
     activeKeyIndex = activeKey;
     if(activeKeyIndex == 2){
-      if(this.area.current){
-        let areaTime = this.area.current.getCurTime()
-        window.appModel.syncCurrentPageDate(areaTime.dateStart,areaTime.dateEnd)
-      }else{
-        window.appModel.syncCurrentPageDate(defaultTime.startTime,defaultTime.endTime)
+      if(window.appModel.syncCurrentPageDate){
+        if(this.area.current){
+          let areaTime = this.area.current.getCurTime()
+          window.appModel.syncCurrentPageDate(areaTime.dateStart,areaTime.dateEnd)
+        }else{
+          window.appModel.syncCurrentPageDate(defaultTime.startTime,defaultTime.endTime)
+        }
       }
     }
     // //存储数据至本地
