@@ -77,10 +77,10 @@ class Area extends PageBase {
           offset = filterData[bigIndex-1].child.length
         }
         data.child.map((col,index) => {
-          columns[index+offset+1].visiable = col.isCheck;
+          console.log(col.isCheck)
+          // columns[index+offset+1].visiable = col.isCheck;
         })
     })
-
     this.setState((prevState) => {
       columns:prevState.columns
     })
