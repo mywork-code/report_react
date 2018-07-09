@@ -7,6 +7,11 @@ import YunYingRi from "../YunyingRi/YunYingRi";
 import Area from "../viewArea/Area"
 import ReactEcharts from 'echarts-for-react';
 import mock from './mock';
+import ApassTable from '../../component/ApassTable/ApassTable'
+import ic_explain from '../../imgs/ic_explain.png'
+import ic_filter from '../../imgs/ic_filter.png'
+import ApassFilter from '../../component/ApassFilter/ApassFilter'
+import {Apis,ApassHttp} from '../../core/';
 
 const TabPane = Tabs.TabPane;
 
@@ -14,20 +19,56 @@ const {
   PageBase,
 } = AyoBase;
 
+class AjqhTitle extends React.Component {
+
+  render() {
+    return (
+      <div className="AjqhTitle">
+        <span className="AjqhTitle-text">{this.props.title}</span>
+        <img src={ic_filter} onClick={this.props.rightClick}></img>
+      </div>
+    );
+  }
+
+}
+
 class FydHome extends PageBase {
   constructor(props){
     super(props);
-    this.state = {option:mock.mockOption(event),
-        charts: [
-           820, 932, 901, 934, 1290, 1330, 1320
-        ]
-    }
+    this.state = {
+      option: mock.mockOption(),
+      dataSource: mock.tableDate().dataSource,
+      columns: mock.tableDate().columns,
+      filterData: mock.filterData(),
+      filterAllData: mock.filterAllData(),
+      filterVisiable: false,
+      filterAllVisiable: false,
+      formData:[600, 300, 901, 934, 1290, 1330, 1320],
 
-    console.log(this.state.option);
+    }
   }
-  componentWillMount(){
-    // console.log(this.getQuery())
+
+  componentDidMount(){
+
+       window.localStorage.removeItem("formData")
+       window.localStorage.setItem("formData",this.state.formData)
+
+
+    ApassHttp.post({
+      url:Apis.api.flowMonitor,
+      params:{
+        "type": "1",
+        "prefixDate": "2018-07-02",
+        "postpositionDate": "2018-07-04",
+        "produceName":"",
+        channel:""
+
+      }
+    },(resp) => {
+      console.log(resp);
+    })
   }
+
   handleModeChange(){
     //存储数据至本地
     BenefitData.set({a:1,b:2});
@@ -52,16 +93,114 @@ class FydHome extends PageBase {
     //   event.target.parentNode.style.backgroundColor="#E0E0E0";
     // },1000)
   }
-  getDpr(){
-        var dpr = $('html').attr('data-dpr');
-        if (dpr == 1) {
-            return 12;
-        }else if (dpr == 2) {
-            return  24;
-        }else {
-            return 36;
-        }
-  };
+  showExPlain = () => {
+  }
+
+  showFilter = () => {
+    this.setState({filterVisiable: true});
+  }
+  filterCancel = () => {
+    this.setState({filterVisiable: false});
+  }
+
+  filterComplete = () => {
+    this.setState({filterVisiable: false});
+    var filterData = this.state.filterData;
+    filterData.map((data,bigIndex) => {
+        data.child.map((col,index) => {
+          if(col.isCheck==true) {
+            console.log(col.value)
+          }
+
+        })
+    })
+
+    // this.setState((prevState) => {
+    //   columns:prevState.columns
+  
+    // })
+  }
+  filterCellClick = (groupIndex,childIndex) => {
+    let groupData = this.state.filterData[groupIndex];
+    let child = groupData.child;
+    child[childIndex].isCheck = !child[childIndex].isCheck;
+    groupData.haveSelect = this.haveSelect(child);
+    this.setState((prevState) => ({
+      filterData: prevState.filterData
+    }));
+  }
+
+
+
+  filterGroupSelectAll = (groupIndex) =>{
+    let groupData = this.state.filterData[groupIndex];
+    let child = groupData.child;
+    child.forEach((data) => {
+      data.isCheck = !data.isCheck
+    });
+    groupData.haveSelect = this.haveSelect(child);
+    this.setState((prevState) => ({
+      filterData: prevState.filterData
+    }));
+  }
+  //
+ showAllFilter = () => {
+    this.setState({filterAllVisiable: true});
+  }
+  filterAllCancel = () => {
+    this.setState({filterAllVisiable: false});
+  }
+
+  filterAllComplete = () => {
+    this.setState({filterAllVisiable: false});
+      var filterData = this.state.filterAllData;
+      filterData.map((data,bigIndex) => {
+          data.child.map((col,index) => {
+            if(col.isCheck==true) {
+              console.log(col.value)
+            }
+            
+          })
+      })
+
+  }
+
+  filterAllCellClick = (groupIndex,childIndex) => {
+    let groupData = this.state.filterAllData[groupIndex];
+    let child = groupData.child;
+    child[childIndex].isCheck = !child[childIndex].isCheck;
+    groupData.haveSelect = this.haveSelect(child);
+    this.setState((prevState) => ({
+      filterData: prevState.filterData
+    }));
+  }
+
+
+  filterAllGroupSelectAll = (groupIndex) =>{
+    let groupData = this.state.filterAllData[groupIndex];
+    let child = groupData.child;
+    child.forEach((data) => {
+      data.isCheck = !data.isCheck
+    });
+    groupData.haveSelect = this.haveSelect(child);
+    this.setState((prevState) => ({
+      filterData: prevState.filterData
+    }));
+  }
+
+
+  //
+ haveSelect(arr){
+    let temp = false;
+    arr.forEach((child) =>{
+      if(child.isCheck){
+        temp = true;
+        return temp;
+      }
+    })
+    return temp;
+  }
+
   render() {
     return (
       // <div className="ajqh-tabs">
@@ -74,9 +213,7 @@ class FydHome extends PageBase {
               <div className="tabs-cell"><span  onClick={this.handleClick} className="isClick">电商运营报表</span></div>
               <div className="tabs-cell"><span  onClick={this.handleClick} className="">贷超流量监控表</span></div>
           </div>
-          <div className="operation-title">趋势图  
-              <img src='http://www.wwtliu.com///sxtstu///blueberrypai///indexImg///banner1.jpg'/>
-          </div>          
+          <AjqhTitle title="趋势图" rightClick={this.showFilter}/>         
           <div className="area-top">
             <ReactEcharts
               option={this.state.option}
@@ -86,37 +223,23 @@ class FydHome extends PageBase {
 
           </div>
           <div className="space-line"></div>
-          <div className="tabs-title">各渠道监控表  
-          <img src='http://www.wwtliu.com///sxtstu///blueberrypai///indexImg///banner1.jpg'/>
-          </div>
-          <div className="operation-row">
-              <div className="row-cell weight">日期</div>
-              <div className="row-cell weight">渠道</div>
-              <div className="row-cell weight">注册人数</div>
-              <div className="row-cell weight">产品</div>
-              <div className="row-cell weight">点击人数</div>
-          </div>
-          <div className="operation-row" onClick={this.viewDetails}>
-              <div className="row-cell">5月1日</div>
-              <div className="row-cell">3000</div>
-              <div className="row-cell">5000</div>
-              <div className="row-cell">4564</div>
-              <div className="row-cell">44445</div>
-          </div>
-          <div className="operation-row">
-              <div className="row-cell">5月2日</div>
-              <div className="row-cell">1000</div>
-              <div className="row-cell">5000</div>
-              <div className="row-cell">4564</div>
-              <div className="row-cell">44445</div>
-          </div>  
-          <div className="operation-row">
-              <div className="row-cell">5月3日</div>
-              <div className="row-cell">2000</div>
-              <div className="row-cell">5000</div>
-              <div className="row-cell">4564</div>
-              <div className="row-cell">44445</div>
-          </div>                     
+          <AjqhTitle title="各渠道监控表" leftClick={this.showExPlain} rightClick={this.showAllFilter}/>
+          <div className="border-line"></div>
+          <ApassTable dataSource={this.state.dataSource} columns={this.state.columns}/>
+          <ApassFilter title="维度指标配置" filterData={this.state.filterData}
+               visiable={this.state.filterVisiable}
+               filterCancel={this.filterCancel}
+               filterComplete={this.filterComplete}
+               filterCellClick={this.filterCellClick}
+               filterGroupSelectAll={this.filterGroupSelectAll}
+           />
+          <ApassFilter title="维度指标配置" filterData={this.state.filterAllData}
+               visiable={this.state.filterAllVisiable}
+               filterCancel={this.filterAllCancel}
+               filterComplete={this.filterAllComplete}
+               filterCellClick={this.filterAllCellClick}
+               filterGroupSelectAll={this.filterAllGroupSelectAll}
+           />                              
       </div>
                
     )
