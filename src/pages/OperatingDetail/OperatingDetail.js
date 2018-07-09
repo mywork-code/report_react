@@ -8,6 +8,7 @@ const {
   PageBase,
 } = AyoBase;
 class OperatingDetail extends PageBase {
+
   constructor(props){
     super(props);
     this.state = {
@@ -18,9 +19,11 @@ class OperatingDetail extends PageBase {
     }
     console.log(this.state);
   }
+
   componentWillMount(){
     // console.log(this.getQuery())
   }
+
   componentDidMount(){
     const that = this
     ApassHttp.post({
@@ -44,6 +47,7 @@ class OperatingDetail extends PageBase {
       })
     })
   }
+
   fmtDate(obj){
     var date =  new Date(obj);
     var y = 1900+date.getYear();
@@ -51,16 +55,7 @@ class OperatingDetail extends PageBase {
     var d = "0"+date.getDate();
     return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
   }
-  componentDidMount(){
-    ApassHttp.post({
-      url:Apis.api.queryReport,
-      params:{
-        "type": "1",
-        "beDate": "2018-07-02",
-        "afDate": "2018-07-04"
-      }
-    })
-  }                
+
   render() {
     return (
       <div className="operation-box">
