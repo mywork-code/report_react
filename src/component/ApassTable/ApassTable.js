@@ -26,7 +26,7 @@ class ApassTable extends React.Component {
 
       for(let j=0 ; j < dsLength ; j++){
         let temp = dataSource[j][columns[i].dataIndex];
-        colSpan.push(<span className="cell" style={ j%2 == 0 ? { backgroundColor:"#F9F9F9"} : {}} key={j}>{ temp ? temp: '' }</span>);
+        colSpan.push(<span className="cell" style={ j%2 == 0 ? { backgroundColor:"#F9F9F9"} : {}} key={j}>{ temp }</span>);
       }
 
       colDiv.push(colSpan);

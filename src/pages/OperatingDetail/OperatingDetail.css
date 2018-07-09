@@ -1,3 +1,60 @@
+<<<<<<< HEAD
 .big-box {
 	width: 6000px;
 }
+=======
+.tabs-title {
+    width: 100%;
+    height: 44px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #484848;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.tabs-title img {
+  position: absolute;
+  right: 18px;
+  top: 15px;
+  width: 7px;
+  height: 14px;
+}
+.space-line {
+  width: 100%;
+  height: 10px;
+  background: #F4F4F4;
+}
+.detail-row {
+    width: 4060px;
+    height: 44px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+.detail-row .row-cell {
+   float: left;
+   font-family: PingFangSC-Regular;
+   font-size: 15px;
+   color: #7E7E7E;
+   width: 140px;
+   height: 44px;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+.detail-row .weight{
+  color: #303030;
+}
+.detail-row:nth-child(even) {
+  background: #F9F9F9;
+}
+.detail-row:nth-child(odd) {
+  background: #fff;
+}
+.operation-box {
+  background: #fff;
+}
+>>>>>>> acfcff14b4eb5f54b1bc17f9fe37d522d3ec85ef

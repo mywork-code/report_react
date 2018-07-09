@@ -8,7 +8,6 @@ import Area from "../viewArea/Area"
 import UserAttr from "../UserAttr/UserAttr"
 import OperatingDetail from "../OperatingDetail/OperatingDetail"
 
-
 const TabPane = Tabs.TabPane;
 
 const {
