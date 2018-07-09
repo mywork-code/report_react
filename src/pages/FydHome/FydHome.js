@@ -15,6 +15,7 @@ const {
 } = AyoBase;
 
 var activeKeyIndex = 1;
+var defaultTime;
 
 class FydHome extends PageBase {
   constructor() {
@@ -28,6 +29,12 @@ class FydHome extends PageBase {
       }
     };
     window.onDateChanged = window.onDateChanged.bind(this);
+
+    let date = new Date();
+    let endTime = this.coverReqTime(date);
+    date.setDate(date.getDate() - 6);
+    let startTime =this.coverReqTime(date)
+    defaultTime = {startTime:startTime,endTime:endTime}
   }
 
   componentWillMount() {
@@ -40,8 +47,9 @@ class FydHome extends PageBase {
       if(this.area.current){
         let areaTime = this.area.current.getCurTime()
         window.appModel.syncCurrentPageDate(areaTime.dateStart,areaTime.dateEnd)
+      }else{
+        window.appModel.syncCurrentPageDate(defaultTime.startTime,defaultTime.endTime)
       }
-
     }
     // //存储数据至本地
     // BenefitData.set({a: 1, b: 2});
@@ -50,6 +58,14 @@ class FydHome extends PageBase {
     // console.log(BenefitData.get());
   }
 
+
+  coverReqTime(date){
+    let month = date.getMonth()+1;
+    month = month < 10 ? "0"+month : month;
+    let day = date.getDate();
+    day = day < 10 ? "0"+day : day;
+    return [date.getFullYear(),"-",month,"-",day].join("");
+  }
 
   render() {
     return (
