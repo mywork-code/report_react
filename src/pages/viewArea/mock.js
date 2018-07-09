@@ -11,13 +11,14 @@ const mockOption = () => {
     tooltip: {
       trigger: 'item',
       // formatter: function(params){
-      // 修改提示框
-      //     console.log(params);
+      //     //修改提示框
       //     var toast =  '<div>'+params.data.name+'</div>'
       //
-      //     toast += '<p>'+ '西安市有效注册人数：200' +'</p>'
-      //     toast += '<p>'+ '咸阳市有效注册人数：200' +'</p>'
+      //     let map = this.ApassConverData.get(params.data.name);
       //
+      //     map.forEach((v,k) => {
+      //       toast += '<p>'+ k +':' + v +'</p>'
+      //     })
       //
       //   return toast;
       //
@@ -47,11 +48,11 @@ const mockOption = () => {
       orient: 'vertical',
       left: 'right',
       top: 'center',
-      feature: {
-        dataView: {readOnly: false},
-        restore: {},
-        saveAsImage: {}
-      }
+      // feature: {
+      //   dataView: {readOnly: false},
+      //   restore: {},
+      //   saveAsImage: {}
+      // }
     },
     series: [
       {
@@ -77,7 +78,9 @@ const mockOption = () => {
           },
           emphasis: {}
         },
-        data: []
+        data: [
+          {name:"上海",value:"30"}
+        ]
       },
     ]
   };
@@ -280,6 +283,7 @@ const StoreCityTable = new Map([
   ["惠州中原","广东"],
   ["中山中原","广东"],
   ["珠海中原","广东"],
+  ["深圳中原","广东"],
 ]);
 
 
@@ -288,5 +292,5 @@ module.exports = {
   mockOption,
   tableDate,
   filterData,
-  StoreCityTable
+  StoreCityTable,
 }

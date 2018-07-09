@@ -12,9 +12,6 @@ import ic_filter from '../../imgs/ic_filter.png';
 
 require('echarts/map/js/china.js');
 
-import Tabs from 'antd-mobile/lib/tabs';
-import 'antd-mobile/lib/tabs/style/css';
-
 
 const {PageBase} = AyoBase;
 
@@ -58,10 +55,12 @@ class Area extends PageBase {
       let map = new Map();
         resp.map((res) => {
           this.tableDataCover(newDataSource,res);
-          this.mapDataCover(map,res);
+          this.mapDataFilter(map,res);
         });
+      let newOptions = this.mapDataCover(map);
       this.setState({
-        dataSource:newDataSource
+        dataSource:newDataSource,
+        option:newOptions
       });
     })
   }
@@ -86,12 +85,54 @@ class Area extends PageBase {
   }
 
 
-  mapDataCover(map,res){
+  mapDataFilter(map,res){
     if(!map.has(res.providedBy)){
       map.set(res.providedBy,res.zyInvokeSuccessCount);
     }else{
       map.set(res.providedBy,map.get(res.providedBy)+res.zyInvokeSuccessCount);
     }
+  }
+
+  mapDataCover(map){
+    let provinceCity = new Map();
+    let provinceNum = new Map();
+    map.forEach((v,k) => {
+        console.log(k,v);
+        if(!provinceCity.has(mock.StoreCityTable.get(k))){
+          let city = new Map();
+          city.set(k,v);
+          provinceCity.set(mock.StoreCityTable.get(k),city);
+          provinceNum.set(mock.StoreCityTable.get(k),v);
+        }else{
+          let city = provinceCity.get(mock.StoreCityTable.get(k));
+          city.set(k,v);
+          provinceNum.set(mock.StoreCityTable.get(k),provinceNum.get(mock.StoreCityTable.get(k))+v);
+        }
+    });
+
+    let newOptions = mock.mockOption();
+
+    newOptions.series[0].data = new Array();
+    provinceNum.forEach((v,k) =>{
+      newOptions.series[0].data.push({name:k,value:v});
+    });
+
+    newOptions.tooltip.formatter = function (params) {
+      if(params.data){
+        var toast =  '<div>'+params.data.name+ '-有效注册人数' +'</div>'
+
+        let map = provinceCity.get(params.data.name);
+
+        map.forEach((v,k) => {
+          toast += '<p>'+ k +':' + v +'</p>'
+        })
+
+        return toast;
+      }else{
+        return '<div>暂无</div>'
+      }
+    };
+    return newOptions;
   }
 
 
@@ -103,6 +144,7 @@ class Area extends PageBase {
 
 
   showExPlain = () => {
+
   }
 
   showFilter = () => {
