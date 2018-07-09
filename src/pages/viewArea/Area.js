@@ -29,6 +29,9 @@ class AreaTitle extends React.Component {
 
 }
 
+var startTime;
+var endTime;
+
 class Area extends PageBase {
 
   constructor(props) {
@@ -39,31 +42,69 @@ class Area extends PageBase {
       columns: mock.tableDate().columns,
       filterData: mock.filterData(),
       filterVisiable: false,
+      startTime:'',
+      endTime:''
     }
   }
 
+  onDateChanged = (data) => {
+    if(data.dateStart != startTime || data.dateEnd != endTime){
+      startTime = data.dateStart;
+      endTime = data.dateEnd;
+      this.getDataByTime(data.dateStart,data.dateEnd);
+    }
+  }
+
+  getCurTime = () => {
+
+    return {dateStart:startTime,dateEnd:endTime};
+
+  }
+
   componentDidMount() {
+    let date = new Date();
+    endTime = this.coverReqTime(date);
+    date.setDate(date.getDate() - 6);
+    startTime =this.coverReqTime(date)
+    this.getDataByTime(startTime,endTime);
+  }
+
+  coverReqTime(date){
+    let month = date.getMonth()+1;
+    month = month < 10 ? "0"+month : month;
+    let day = date.getDate();
+    day = day < 10 ? "0"+day : day;
+    return [date.getFullYear(),"-",month,"-",day].join("");
+  }
+
+  getDataByTime(start,end){
+    window.appModel.showLoading();
     ApassHttp.post({
       url: Apis.api.queryReport,
       params: {
         "type": "2",
-        "beDate": "2018-07-02",
-        "afDate": "2018-07-04"
+        "beDate": start,
+        "afDate": end
       }
     }, (resp) => {
+      console.log(resp);
+      window.appModel.closeLoading();
       let newDataSource = new Array();
       let map = new Map();
-        resp.map((res) => {
-          this.tableDataCover(newDataSource,res);
-          this.mapDataFilter(map,res);
-        });
+      resp.map((res) => {
+        this.tableDataCover(newDataSource,res);
+        this.mapDataFilter(map,res);
+      });
       let newOptions = this.mapDataCover(map);
       this.setState({
         dataSource:newDataSource,
         option:newOptions
       });
-    })
+    },(e) => {
+      window.appModel.closeLoading();
+    });
   }
+
 
   tableDataCover(array,res){
     array.push({

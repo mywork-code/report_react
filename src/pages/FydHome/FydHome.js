@@ -14,23 +14,42 @@ const {
   PageBase,
 } = AyoBase;
 
+var activeKeyIndex = 1;
+
 class FydHome extends PageBase {
   constructor() {
     super();
     this.state = {}
+    this.area = React.createRef();
+    window.onDateChanged = function (data) {
+      if(activeKeyIndex == 2){
+        console.log(data)
+        this.area.current.onDateChanged(data);
+      }
+    };
+    window.onDateChanged = window.onDateChanged.bind(this);
   }
 
   componentWillMount() {
     // console.log(this.getQuery())
   }
 
-  handleModeChange() {
-    //存储数据至本地
-    BenefitData.set({a: 1, b: 2});
+  handleModeChange = (activeKey) => {
+    activeKeyIndex = activeKey;
+    if(activeKeyIndex == 2){
+      if(this.area.current){
+        let areaTime = this.area.current.getCurTime()
+        window.appModel.syncCurrentPageDate(areaTime.dateStart,areaTime.dateEnd)
+      }
 
-    //从本地获取数据
-    console.log(BenefitData.get());
+    }
+    // //存储数据至本地
+    // BenefitData.set({a: 1, b: 2});
+    //
+    // //从本地获取数据
+    // console.log(BenefitData.get());
   }
+
 
   render() {
     return (
@@ -43,7 +62,7 @@ class FydHome extends PageBase {
             <YunYingRi/>
           </TabPane>
           <TabPane tab="地区监控表" key="2">
-            <Area/>
+            <Area ref={this.area}/>
           </TabPane>
           <TabPane tab="运营明细表" key="3"><OperatingDetail/></TabPane>
           <TabPane tab="用户属性分析表" key="4">
