@@ -11,8 +11,8 @@ if(process.env.NODE_ENV == 'development'){
 
 const api = {
   queryReport:'daily/query',
+  flowMonitor:'dkcs/querydkcs',
 }
-
 
 module.exports = {
   BASE_SERVER,

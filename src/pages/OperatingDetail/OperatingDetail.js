@@ -2,28 +2,26 @@ import React from 'react';
 import AyoBase from '../../core';
 import './OperatingDetail.css';
 import mock from './mock';
-
 import ApassTable from '../../component/ApassTable/ApassTable'
 import {Apis,ApassHttp} from '../../core/index';
-
 const {
   PageBase,
 } = AyoBase;
-
 class OperatingDetail extends PageBase {
+
   constructor(props){
     super(props);
     this.state = {
       dataSource: [],
       columns: [],
+      startDate:'',
+      endDate:''
     }
-
     console.log(this.state);
   }
 
   componentWillMount(){
     // console.log(this.getQuery())
-
   }
 
   componentDidMount(){
@@ -32,8 +30,8 @@ class OperatingDetail extends PageBase {
       url:Apis.api.queryReport,
       params:{
         "type": "1",
-        "beDate": "2018-07-02",
-        "afDate": "2018-07-04"
+        "beDate": this.state.startDate == ''?"2018-07-02":this.state.startDate,
+        "afDate": this.state.endDate == ''?"2018-07-04":this.state.endDate,
       }
     },(resp) => {
       // 请求接口成功-赋值
@@ -43,7 +41,6 @@ class OperatingDetail extends PageBase {
           item.reportDateStr = that.fmtDate(item.reportDate)
         }
       })
-
       that.setState({
         dataSource:resp,
         columns:mock.tableDate().columns
@@ -64,9 +61,7 @@ class OperatingDetail extends PageBase {
       <div className="operation-box">
         <ApassTable dataSource={this.state.dataSource} columns={this.state.columns}/>
       </div>
-
     )
   }
 }
-
 export default OperatingDetail;

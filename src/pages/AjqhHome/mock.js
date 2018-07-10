@@ -1,7 +1,8 @@
 
 
 const mockOption = () =>{
-    return {        
+console.log(window.localStorage.getItem("formData"))
+    return {
               //图表的标题
                 title: {
                     text: ''
@@ -50,9 +51,7 @@ const mockOption = () =>{
                                 color: "#71AFFF"
                             }
                         },
-                        data:[
-                            100, 200, 300, 400, 1290, 1330, 1320
-                        ],
+                        data:window.localStorage.getItem("formData"),
        
                     }, {
                         name: '熊猫贷款',
@@ -93,8 +92,178 @@ const mockOption = () =>{
 
     };
 }
+const tableDate = () => {
+  return {
+    dataSource: [
+      {
+        date: '5月1号',
+        source: '258',
+        registerNum:'27',
+        product:"135",
+        clickNum:'369'
 
+      },
+      {
+        date: '5月2号',
+        source: '258',
+        registerNum:'27',
+        product:"135",
+        clickNum:'369'
+
+      },
+      {
+        date: '5月3号',
+        source: '258',
+        registerNum:'27',
+        product:"135",
+        clickNum:'369'
+
+      },
+      {
+        date: '5月4号',
+        source: '258',
+        registerNum:'27',
+        product:"135",
+        clickNum:'369'
+
+      },            
+     
+    ],
+    columns: [
+      {
+        title: '日期',
+        dataIndex: 'date',
+        key: 'date',
+        visiable:true,
+      },
+      {
+        title: '渠道',
+        dataIndex: 'source',
+        key: 'source',
+        visiable:true,
+      },
+      {
+        title: '注册人数',
+        dataIndex: 'registerNum',
+        key: 'registerNum',
+        visiable:true,
+      },
+      {
+        title: '产品',
+        dataIndex: 'product',
+        key: 'product',
+        visiable:true,
+      },
+      {
+        title: '点击人数',
+        dataIndex: 'clickNum',
+        key: 'clickNum',
+        visiable:true
+      }
+
+
+
+    ]
+
+  }
+}
+const filterData = () => {
+  return [
+    {
+      groupTitle:'产品筛选',
+      groupId:'productStep',
+      haveSelect:true,
+      child:[
+        {
+          value:'熊猫贷款',
+          isCheck:true,
+        },
+        {
+          value:'秒易花',
+          isCheck:true,
+        },
+        {
+          value:'借云',
+          isCheck:true,
+        },
+        {
+          value:'康乐享',
+          isCheck:true,
+        },
+        {
+          value:'淘钱宝',
+          isCheck:true,
+        },
+        {
+          value:'花花白卡',
+          isCheck:true,
+        }
+
+
+      ]
+    }
+  ]
+}
+const filterAllData = () => {
+  return [
+    {
+      groupTitle:'产品筛选',
+      groupId:'withdrawStep',
+      haveSelect:true,
+      child:[
+        {
+          value:'熊猫贷款',
+          isCheck:true,
+        },
+        {
+          value:'秒易花',
+          isCheck:true,
+        },
+        {
+          value:'借云',
+          isCheck:true,
+        },
+        {
+          value:'康乐享',
+          isCheck:true,
+        },
+        {
+          value:'淘钱宝',
+          isCheck:true,
+        },
+        {
+          value:'花花白卡',
+          isCheck:true,
+        }
+
+      ]
+    },
+    {
+      groupTitle:'渠道筛选',
+      groupId:'withdrawStep',
+      haveSelect:true,
+      child:[
+        {
+          value:'今日头条',
+          isCheck:true,
+        },
+        {
+          value:'百度',
+          isCheck:true,
+        },
+        {
+          value:'360',
+          isCheck:true,
+        }
+      ]
+    }
+  ]
+}
 
 module.exports = {
-  mockOption
+  mockOption,
+  tableDate,
+  filterData,
+  filterAllData
+
 }
