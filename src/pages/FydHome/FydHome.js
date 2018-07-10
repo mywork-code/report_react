@@ -7,6 +7,7 @@ import YunYingRi from "../YunyingRi/YunYingRi";
 import Area from "../viewArea/Area"
 import UserAttr from "../UserAttr/UserAttr"
 import OperatingDetail from "../OperatingDetail/OperatingDetail"
+import PropTypes from 'prop-types';
 
 const TabPane = Tabs.TabPane;
 
@@ -55,4 +56,8 @@ class FydHome extends PageBase {
   }
 }
 
+FydHome.contextTypes = {
+  router:PropTypes.object
+}
+PropTypes.object
 export default FydHome;

@@ -2,8 +2,11 @@ import React from 'react';
 import AyoBase from '../../core/index';
 import './YunYingRi.css';
 import {Row, Col, Modal} from 'antd'
+import ApassTable from '../../component/ApassTable/ApassTable';
 import ApassFilter from '../../component/ApassFilter/ApassFilter'
 import YunyingRiData from './YunyingRiData'
+import PropTypes from 'prop-types';
+
 
 import ic_explain from '../../imgs/ic_explain.png'
 import ic_filter from '../../imgs/ic_filter.png'
@@ -15,19 +18,24 @@ const {
 import ReactEcharts from 'echarts-for-react';
 import HttpClient from "../../core/http/HttpClient";
 
-class AreaTitle extends React.Component {
-  render() {
-    return (
-      <div className="title">
-        <img src={ic_explain} onClick={this.props.leftClick}></img>
-        <span className="title-text">{this.props.title}</span>
-        <img src={ic_filter} onClick={this.props.rightClick}></img>
-      </div>
-    );
-  }
+const AreaTitle = (props) => {
+  const {
+    rightClick,
+    leftClick,
+    title,
+  } = props;
+  return (<div className="title">
+      < img src={ic_explain} onClick={() => { leftClick && leftClick()}}></img>
+      <span className="title-text">{title || '--'}</span>
+      < img src={ic_filter} onClick={() => { rightClick && rightClick()}}></img>
+    </div>
+  );
 }
 
 class YunYingRi extends PageBase {
+  static contextTypes = {
+    router: PropTypes.object
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -35,8 +43,10 @@ class YunYingRi extends PageBase {
       dataSource: YunyingRiData.tableData().dataSource,
       columns: YunyingRiData.tableData().columns,
       filterData: YunyingRiData.filterData(),
-      filterVisiable: true,
+      filterVisiable: false,
     };
+
+    this.showFilter.bind(this);
   }
 
   componentDidMount() {
@@ -47,6 +57,7 @@ class YunYingRi extends PageBase {
     });
   }
   showExPlain = () => {
+    this.context.router.history.push("/weidu-explain")
   }
 
   showFilter = () => {
@@ -58,6 +69,7 @@ class YunYingRi extends PageBase {
 
   filterComplete = () => {
     this.setState({filterVisiable: false});
+
     var filterData = this.state.filterData;
     var columns = this.state.columns;
     filterData.map((data,bigIndex) => {
@@ -165,7 +177,7 @@ class YunYingRi extends PageBase {
             'M945.056 563.36h-224.8a16 16 0 0 1 0-32h224.8a16 16 0 0 1 0 32zM945.056 699.168h-224.8a16 16 0 0 1 0-32h224.8a16 16 0 0 1 0 32zM945.056 835.04h-224.8a16 16 0 0 1 0-32h224.8a16 ' +
             '16 0 0 1 0 32z',
             onclick: () => {
-
+              this.showFilter();
             }
           }
         },
@@ -275,8 +287,7 @@ class YunYingRi extends PageBase {
                 option={this.state.option}
                 style={{height: '450px', weight: '676px'}}
               />
-              <AreaTitle title="各地区用户业务转化监控" leftClick={this.showExPlain} rightClick={this.showFilter}/>
-
+              <AreaTitle title="各地区用户业务转化监控" leftClick={this.showExPlain.bind(this)} rightClick={this.showFilter}/>
               <ApassFilter title="维度指标配置" filterData={this.state.filterData}
                            visiable={this.state.filterVisiable}
                            filterCancel={this.filterCancel}
@@ -284,6 +295,8 @@ class YunYingRi extends PageBase {
                            filterCellClick={this.filterCellClick}
                            filterGroupSelectAll={this.filterGroupSelectAll}
               />
+
+              <ApassTable dataSource={this.state.dataSource} columns={this.state.columns}/>
 
             </div>
           </Col>

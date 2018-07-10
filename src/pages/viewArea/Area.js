@@ -122,6 +122,7 @@ class Area extends PageBase {
       if (bigIndex != 0) {
         offset = filterData[bigIndex - 1].child.length
       }
+      debugger
       data.child.map((col, index) => {
         columns[index + offset + 1].visiable = col.isCheck;
       })

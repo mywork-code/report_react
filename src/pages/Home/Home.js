@@ -1,7 +1,6 @@
 import React from 'react';
 import AyoBase from '../../core';
 import './Home.css';
-import BenefitData from '../data/testData';
 import {Row,Col,Card} from 'antd'
 
 const { Meta } = Card;
@@ -70,5 +69,6 @@ class Home extends PageBase {
     )
   }
 }
+
 
 export default Home;
