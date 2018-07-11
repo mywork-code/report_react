@@ -29,8 +29,8 @@ class AreaTitle extends React.Component {
 
 }
 
-var startTime;
-var endTime;
+let startTime;
+let endTime;
 
 class Area extends PageBase {
 
@@ -78,7 +78,10 @@ class Area extends PageBase {
   }
 
   getDataByTime(start,end){
-    window.appModel.showLoading();
+    if(window.appModel){
+      window.appModel.showLoading();
+    }
+
     ApassHttp.post({
       url: Apis.api.queryReport,
       params: {
@@ -87,8 +90,9 @@ class Area extends PageBase {
         "afDate": end
       }
     }, (resp) => {
-      console.log(resp);
-      window.appModel.closeLoading();
+      if( window.appModel){
+        window.appModel.closeLoading();
+      }
       let newDataSource = new Array();
       let map = new Map();
       resp.map((res) => {
@@ -101,7 +105,9 @@ class Area extends PageBase {
         option:newOptions
       });
     },(e) => {
-      window.appModel.closeLoading();
+      if(window.appModel){
+        window.appModel.closeLoading();
+      }
     });
   }
 

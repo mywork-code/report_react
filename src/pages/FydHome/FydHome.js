@@ -1,13 +1,13 @@
 import React from 'react';
 import AyoBase from '../../core';
 import './FydHome.css';
-import BenefitData from '../data/testData';
 import {Tabs} from 'antd'
 import YunYingRi from "../YunyingRi/YunYingRi";
 import Area from "../viewArea/Area"
 import UserAttr from "../UserAttr/UserAttr"
 import OperatingDetail from "../OperatingDetail/OperatingDetail"
 import PropTypes from 'prop-types';
+
 
 const TabPane = Tabs.TabPane;
 
@@ -23,10 +23,16 @@ class FydHome extends PageBase {
     super();
     this.state = {}
     this.area = React.createRef();
+    this.ribao = React.createRef();
     window.onDateChanged = function (data) {
       if(activeKeyIndex == 2){
         console.log(data)
         this.area.current.onDateChanged(data);
+      }else if(activeKeyIndex == 1){
+        console.log(data)
+        if(this.ribao && this.ribao.current){
+          this.ribao.current.onDateChanged(data);
+        }
       }
     };
     window.onDateChanged = window.onDateChanged.bind(this);
@@ -44,8 +50,8 @@ class FydHome extends PageBase {
 
   handleModeChange = (activeKey) => {
     activeKeyIndex = activeKey;
-    if(activeKeyIndex == 2){
-      if(window.appModel.syncCurrentPageDate){
+    if(activeKeyIndex == 2 || activeKeyIndex == 1){
+      if(window.appModel){
         if(this.area.current){
           let areaTime = this.area.current.getCurTime()
           window.appModel.syncCurrentPageDate(areaTime.dateStart,areaTime.dateEnd)
@@ -78,7 +84,7 @@ class FydHome extends PageBase {
               tabBarStyle={{marginBottom:0}}
         >
           <TabPane tab="运营日报表" key="1">
-            <YunYingRi/>
+            <YunYingRi ref={this.ribao}/>
           </TabPane>
           <TabPane tab="地区监控表" key="2">
             <Area ref={this.area}/>

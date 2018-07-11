@@ -4,58 +4,61 @@ import './YunYingRi.css';
 import {Row, Col, Modal} from 'antd'
 import ApassTable from '../../component/ApassTable/ApassTable';
 import ApassFilter from '../../component/ApassFilter/ApassFilter'
-import YunyingRiData from './YunyingRiData'
+import mock from './mock'
 import PropTypes from 'prop-types';
-
+import {withRouter} from 'react-router-dom'
 
 import ic_explain from '../../imgs/ic_explain.png'
 import ic_filter from '../../imgs/ic_filter.png'
-
 
 const {
   PageBase,
 } = AyoBase;
 import ReactEcharts from 'echarts-for-react';
 import HttpClient from "../../core/http/HttpClient";
+import ApassFilter2 from "../../component/ApassFilter2";
+import {ApassHttp, Apis} from "../../core";
 
-const AreaTitle = (props) => {
-  const {
-    rightClick,
-    leftClick,
-    title,
-  } = props;
-  return (<div className="title">
-      < img src={ic_explain} onClick={() => { leftClick && leftClick()}}></img>
-      <span className="title-text">{title || '--'}</span>
-      < img src={ic_filter} onClick={() => { rightClick && rightClick()}}></img>
-    </div>
-  );
+var startTime;
+var endTime;
+
+class AreaTitle extends React.Component{
+  render(){
+    return (<div className="title">
+        < img src={ic_explain} onClick={() => {
+         this.props.leftClick()
+        }}></img>
+        <span className="title-text">{this.props.title}</span>
+        < img src={ic_filter} onClick={() => {
+          this.props.rightClick()
+        }}></img>
+      </div>
+    );
+  }
 }
 
 class YunYingRi extends PageBase {
   static contextTypes = {
     router: PropTypes.object
   }
+
   constructor(props) {
     super(props);
     this.state = {
-      option: this.getOption(),
-      dataSource: YunyingRiData.tableData().dataSource,
-      columns: YunyingRiData.tableData().columns,
-      filterData: YunyingRiData.filterData(),
+      option: '',
+      dataSource: [],
+      columns: mock.tableData().columns,
+      filterData: mock.filterData(),
+      filterData2: mock.filterData2(),
       filterVisiable: false,
+      filterVisiable2: false,
     };
 
     this.showFilter.bind(this);
+    this.getLegendDataArr.bind(this);
+    this.getSeriesArr.bind(this);
   }
 
-  componentDidMount() {
-    HttpClient.get({
-      url: 'http://newsapi.gugujiankong.com/Handler.ashx?action=getnews&type=top&count=10',
-    }, (data) => {
-      console.log(data);
-    });
-  }
   showExPlain = () => {
     this.context.router.history.push("/weidu-explain")
   }
@@ -72,15 +75,26 @@ class YunYingRi extends PageBase {
 
     var filterData = this.state.filterData;
     var columns = this.state.columns;
-    filterData.map((data,bigIndex) => {
-      let offset = 0;
-      if(bigIndex != 0){
-        offset = filterData[bigIndex-1].child.length
-      }
-      data.child.map((col,index) => {
-        columns[index+offset+1].visiable = col.isCheck;
+    let hasCheck = 0;
+    filterData.map((data, bigIndex) => {
+      data.child.map((col, index) => {
+        if(col.isCheck){
+          hasCheck = hasCheck + 1;
+        }
+        columns.forEach((item, index) => {
+          if (item.title == col.value) {
+            item.visiable = col.isCheck
+          }
+        })
       })
     })
+
+    if (hasCheck < 1) {
+      Modal.warning({
+        title: '警告',
+        content: '最少选择1项',
+      });
+    }
 
     this.setState((prevState) => {
       columns:prevState.columns
@@ -88,7 +102,7 @@ class YunYingRi extends PageBase {
 
   }
 
-  filterCellClick = (groupIndex,childIndex) => {
+  filterCellClick = (groupIndex, childIndex) => {
     let groupData = this.state.filterData[groupIndex];
     let child = groupData.child;
     child[childIndex].isCheck = !child[childIndex].isCheck;
@@ -97,9 +111,7 @@ class YunYingRi extends PageBase {
       filterData: prevState.filterData
     }));
   }
-
-
-  filterGroupSelectAll = (groupIndex) =>{
+  filterGroupSelectAll = (groupIndex) => {
     let groupData = this.state.filterData[groupIndex];
     let child = groupData.child;
     child.forEach((data) => {
@@ -111,10 +123,11 @@ class YunYingRi extends PageBase {
     }));
   }
 
-  haveSelect(arr){
+
+  haveSelect(arr) {
     let temp = false;
-    arr.forEach((child) =>{
-      if(child.isCheck){
+    arr.forEach((child) => {
+      if (child.isCheck) {
         temp = true;
         return temp;
       }
@@ -122,8 +135,255 @@ class YunYingRi extends PageBase {
     return temp;
   }
 
+  filterComplete2 = () => {
+    this.getLegendDataArr();
+    this.getSeriesArr();
+    this.setState({filterVisiable2: false});
+  }
 
-  getOption = (XData, YData) => {
+  filterCellClick2 = (groupIndex, childIndex) => {
+    let groupData = this.state.filterData2[groupIndex];
+    let child = groupData.child;
+    child[childIndex].isCheck = !child[childIndex].isCheck;
+
+    let hasCheck = 0;
+    this.state.filterData2.forEach((item1, index1) => {
+      item1.child.forEach((item, index) => {
+        if (item.isCheck) {
+          hasCheck = hasCheck + 1;
+        }
+      })
+    })
+    if (hasCheck > 3) {
+      Modal.warning({
+        title: '警告',
+        content: '最多只可选择3项',
+      });
+      child[childIndex].isCheck = !child[childIndex].isCheck;
+    }
+    this.setState((prevState) => ({
+      filterData2: prevState.filterData2
+    }));
+
+  }
+
+  filterCancel2 = () => {
+    this.setState({filterVisiable2: false});
+  }
+
+  getLegendDataArr = () => {
+    var arr = [];
+    this.state.filterData2.forEach((item, index) => {
+      item.child.forEach((chItem, chIndex) => {
+        if (chItem.isCheck) {
+          arr.push(chItem.value)
+        }
+      })
+    })
+    return arr;
+  }
+  getXAxisData = ()=>{
+    var arr = [];
+    this.state.dataSource.forEach((jsonObj,index)=>{
+      arr.push(jsonObj.date)
+    })
+
+    return arr;
+  }
+  getSeriesArr = () => {
+    var arr = [];
+    this.state.filterData2.forEach((item, index) => {
+      item.child.forEach((chItem, chIndex) => {
+        if (chItem.isCheck) {
+          let jsonObj = {};
+          jsonObj.name = chItem.value,
+            new RegExp("率").test(chItem.value) ?
+              (
+                jsonObj.type = 'line',
+                  jsonObj.yAxisIndex = 1
+              ) :
+              (
+                jsonObj.type = 'bar',
+                  jsonObj.yAxisIndex = 0
+              )
+          jsonObj.data = this.getSeriesData(chItem.value);
+          arr.push(jsonObj)
+        }
+      })
+    })
+    return arr;
+  }
+
+  getSeriesData = (item) => {
+    var arr = [];
+    this.state.dataSource.forEach((jsonObj, index) => {
+      if (item == "有效注册率") {
+        arr.push(jsonObj.effectiveRegisterPer)
+      }
+      else if (item == "决策完成率") {
+        arr.push(jsonObj.decisionCompletionPer)
+      }
+      else if (item == "决策通过率") {
+        arr.push(jsonObj.decisionPassPer)
+      }
+      else if (item == "提现率") {
+        arr.push(jsonObj.drawMoneyPer)
+      }
+      else if (item == "电审通过率") {
+        arr.push(jsonObj.autoCheckPer)
+      }
+      else if (item == "综合转化率") {
+        arr.push(jsonObj.compositePer)
+      }
+      else if (item == "趣花注册人数") {
+        arr.push(jsonObj.ajqhRegisterNum)
+      }
+      else if (item == "房易贷注册人数") {
+        arr.push(jsonObj.fydRegisterNum)
+      }
+      else if (item == "注册截流数") {
+        arr.push(jsonObj.intercepteRegisterNum)
+      }
+      else if (item == "中原交互总数") {
+        arr.push(jsonObj.alternationWithZhongYuanNum)
+      }
+      else if (item == "有效注册数") {
+        arr.push(jsonObj.effectiveRegisterNum)
+      }
+      else if (item == "手机认证数") {
+        arr.push(jsonObj.mobileAuthenticationNum)
+      }
+      else if (item == "银行卡认证数") {
+        arr.push(jsonObj.cardAuthenticationNum)
+      }
+      else if (item == "决策通过数") {
+        arr.push(jsonObj.decisionPassNum)
+      }
+      else if (item == "提现人数") {
+        arr.push(jsonObj.drawMoneyNum)
+      }
+      else if (item == "提现通过人数") {
+        arr.push(jsonObj.drawMoneyPassNum)
+      }
+      else if (item == "签约金额") {
+        arr.push(jsonObj.signMoneyCount)
+      }
+      else if (item == "决策完成数") {
+        arr.push(jsonObj.decisionCompletionNum)
+      }
+      else if (item == "电审人数") {
+        arr.push(jsonObj.autoCheckNum)
+      }
+      else if (item == "电审通过人数") {
+        arr.push(jsonObj.autoCheckPassNum)
+      }
+    })
+
+    return arr;
+  }
+
+  componentDidMount() {
+    this.setState({
+      option: this.getOption(this.getLegendDataArr(), this.getXAxisData(), this.getSeriesArr())
+    })
+
+    let date = new Date();
+    endTime = this.coverReqTime(date);
+    date.setDate(date.getDate() - 6);
+    startTime =this.coverReqTime(date)
+    this.getDataByTime(startTime,endTime);
+  }
+
+  coverReqTime(date){
+    let month = date.getMonth()+1;
+    month = month < 10 ? "0"+month : month;
+    let day = date.getDate();
+    day = day < 10 ? "0"+day : day;
+    return [date.getFullYear(),"-",month,"-",day].join("");
+  }
+  tableDataCover(array,res){
+    array.push({
+      date: this.timestampToDate(res.reportDate),
+      effectiveRegisterPer: res.registerCount==0 ? 0 :  res.zyInvokeSuccessCount/res.registerCount,
+      decisionCompletionPer:res.zyInvokeSuccessCount,
+      decisionPassPer:this.toFloatMethod(res.authFinishPassCal),
+      drawMoneyPer:this.toFloatMethod(res.withdrawApplyCal),
+      autoCheckPer: res.auditWaitCount == 0 ? 0 : res.auditPassCount/res.auditWaitCount,
+      compositePer: res.zyInvokeSuccessCount == 0 ? 0 :  res.auditPassCount/res.zyInvokeSuccessCount,
+      ajqhRegisterNum: res.registerCount,
+      fydRegisterNum: res.zyInvokeSuccessCount,
+      intercepteRegisterNum:res.zyInvokeTotalCount-res.zyInvokeSuccessCount,
+      alternationWithZhongYuanNum:res.zyInvokeTotalCount,
+      effectiveRegisterNum:res.zyInvokeSuccessCount,
+      mobileAuthenticationNum:res.identityAuthCount,
+      cardAuthenticationNum:res.cardAuthCount,
+      decisionPassNum:res.authFinishPass,
+      drawMoneyNum:res.withdrawApply,
+      drawMoneyPassNum:res.withdrawApply-res.withdrawApplyReject,
+      signMoneyCount:res.submitOrderPassTotalAmount,
+      decisionCompletionNum:res.authFinishPass,
+      autoCheckNum:res.auditWaitCount,
+      autoCheckPassNum:res.auditPassCount,
+    });
+  }
+  toFloatMethod = (str)=>{
+    let temp =str.substring(0,str.length-1);
+    console.log(Number(temp)/100)
+    return Number(temp)/100;
+
+  }
+  timestampToDate(times){
+    if(startTime == endTime){
+      let date = new Date();
+      date.setTime(times);
+      return [date.getHours()+1,":","00"].join("");
+    }else {
+      let date = new Date();
+      date.setTime(times);
+      return [(date.getMonth()+1),"月",date.getDate(),"日"].join("");
+
+    }
+  }
+
+  onDateChanged = (data) => {
+    if(data.dateStart != startTime || data.dateEnd != endTime){
+      startTime = data.dateStart;
+      endTime = data.dateEnd;
+      this.getDataByTime(data.dateStart,data.dateEnd);
+    }
+  }
+
+  getDataByTime(start,end){
+    if(window.appModel){
+      window.appModel.showLoading();
+    }
+    ApassHttp.post({
+      url: Apis.api.ribaobiao,
+      params: {
+        "type": "1",
+        "beDate": start,
+        "afDate": end,
+      }
+    }, (resp) => {
+      console.log(resp)
+      if( window.appModel){
+        window.appModel.closeLoading();
+      }
+      let newDataSource = [];
+      resp.map((res) => {
+        this.tableDataCover(newDataSource,res);
+      });
+      this.setState({
+        dataSource:newDataSource,
+      });
+    },(e) => {
+      if(window.appModel){
+        window.appModel.closeLoading();
+      }
+    });
+  }
+
+  getOption = (legendDataArr, xAxisData,seriesArr) => {
     return {
       title: {
         text: "趋势图",
@@ -142,7 +402,9 @@ class YunYingRi extends PageBase {
         trigger: "axis"
       },
       legend: {
-        data: ["有效注册率", "决策完成率", "提现率"],
+        // data: ["有效注册率", "决策完成率", "提现率"],//TODO
+        type:'scroll',
+        data: legendDataArr,
         textStyle: {
           align: "right",
           fontSize: 12,
@@ -156,16 +418,6 @@ class YunYingRi extends PageBase {
       toolbox: {
         show: true,
         feature: {
-          dataView: {
-            readOnly: true,
-            show: true
-          },
-          restore: {
-            show: true
-          },
-          saveAsImage: {
-            show: true
-          },
           myDimensionalyModel: {
             show: true,
             title: '维度指标',
@@ -177,17 +429,22 @@ class YunYingRi extends PageBase {
             'M945.056 563.36h-224.8a16 16 0 0 1 0-32h224.8a16 16 0 0 1 0 32zM945.056 699.168h-224.8a16 16 0 0 1 0-32h224.8a16 16 0 0 1 0 32zM945.056 835.04h-224.8a16 16 0 0 1 0-32h224.8a16 ' +
             '16 0 0 1 0 32z',
             onclick: () => {
-              this.showFilter();
+              this.setState({
+                filterVisiable2: true
+              })
             }
           }
         },
-        showTitle: true
       },
       calculable: true,
       xAxis: [
         {
           type: "category",
-          data: ["2018-06-30", "2018-07-01", "2018-07-02", "2018-07-03", "2018-07-04", "2018-07-05", "2018-07-06"],
+          // data: ["2018-06-30", "2018-07-01", "2018-07-02", "2018-07-03", "2018-07-04", "2018-07-05", "2018-07-06"],
+          data:xAxisData,
+          axisLine: {
+            show: false
+          }
         }
       ],
       grid: {
@@ -196,7 +453,6 @@ class YunYingRi extends PageBase {
       yAxis: [
         {
           type: "value",
-          name: "",
           axisLine: {
             lineStyle: {
               width: 2
@@ -217,7 +473,6 @@ class YunYingRi extends PageBase {
         },
         {
           type: "value",
-          name: "",
           min: 0,
           max: 1,
           axisLine: {
@@ -236,7 +491,8 @@ class YunYingRi extends PageBase {
           }
         }
       ],
-      series: [
+      /*series: [//TODO
+
         {
           name: "有效注册率",
           type: "line",
@@ -272,7 +528,9 @@ class YunYingRi extends PageBase {
           },
           yAxisIndex: 1
         }
-      ]
+      ],*/
+      series: seriesArr
+
     }
   };
 
@@ -280,11 +538,10 @@ class YunYingRi extends PageBase {
     return (
       <div className='yunying-grap'>
         <Row>
-          <Col span={2}></Col>
-          <Col span={20}>
+          <Col span={24}>
             <div>
               <ReactEcharts
-                option={this.state.option}
+                option={this.getOption(this.getLegendDataArr(), this.getXAxisData(), this.getSeriesArr())}
                 style={{height: '450px', weight: '676px'}}
               />
               <AreaTitle title="各地区用户业务转化监控" leftClick={this.showExPlain.bind(this)} rightClick={this.showFilter}/>
@@ -296,11 +553,17 @@ class YunYingRi extends PageBase {
                            filterGroupSelectAll={this.filterGroupSelectAll}
               />
 
-              <ApassTable dataSource={this.state.dataSource} columns={this.state.columns}/>
+              <ApassFilter2 title="维度指标配置" filterData={this.state.filterData2}
+                            visiable={this.state.filterVisiable2}
+                            filterCancel={this.filterCancel2}
+                            filterComplete={this.filterComplete2}
+                            filterCellClick={this.filterCellClick2}
+              />
 
+              <ApassTable dataSource={this.state.dataSource} columns={this.state.columns}/>
             </div>
+
           </Col>
-          <Col span={2}></Col>
         </Row>
       </div>
     )

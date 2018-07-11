@@ -12,6 +12,7 @@ if(process.env.NODE_ENV == 'development'){
 const api = {
   queryReport:'daily/query',
   flowMonitor:'dkcs/querydkcs',
+  ribaobiao:'daily/query'
 }
 
 module.exports = {

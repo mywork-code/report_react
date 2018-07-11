@@ -106,7 +106,7 @@ const getDataSource2 = () => {
     }, {
       key: '20',
       name: '电审通过率',
-      mean: '',
+      mean: '电审通过人数/电审人数',
     },{
       key: '21',
       name: '综合转化率',

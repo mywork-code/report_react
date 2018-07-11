@@ -11,6 +11,7 @@ class ApassHttpClicent{
       options.params = JSON.stringify(options.params);
     }
     options.params = encrypt.encryptAES(options.params);
+    console.log(options.params)
     request.post(Apis.BASE_URL+Apis.BASE_SERVER+options.url)
       .accept('application/json')
       .send({ "h5Data": options.params })

@@ -21,7 +21,6 @@ class ApassTable extends React.Component {
     for(let i=0 ; i< colsLength ; i++){
 
       let colSpan = new Array();
-
       colSpan.push(<span className="cell" key={columns[i].key}>{columns[i].title}</span>);
 
       for(let j=0 ; j < dsLength ; j++){

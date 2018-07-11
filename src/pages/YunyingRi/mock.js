@@ -2,26 +2,30 @@
 const tableData = () => {
   return {
     dataSource: [
-      {
-        date: '5月1号',
-        effectiveRegisterPer: '安徽',
-        decisionCompletionPer:'1',
-        decisionPassPer:'2',
-        drawMoneyPer:"3",
-        autoCheckPer:"3",
-        compositePer:"3",
-        ajqhRegisterNum:"3",
-        fydRegisterNum:"3",
-        intercepteRegisterNum:"3",
-        alternationWithZhongYuanNum:"3",
-        effectiveRegisterNum:"3",
-        mobileAuthenticationNum:"3",
-        cardAuthenticationNum:"3",
-        decisionPassNum:"3",
-        drawMoneyNum:"3",
-        drawMoneyPassNum:"3",
-        signMoneyCount:"3"
-      },
+      /*{
+        date: '5月1号',//日期reportDate
+        effectiveRegisterPer: '0.2',//有效注册率
+        decisionCompletionPer:'0.6',//决策完成率
+        decisionPassPer:'0.2',//决策通过率
+        drawMoneyPer:"0.3",//提现率
+        autoCheckPer:"0.3",//电审通过率
+        compositePer:"0.3",//综合转化率
+        ajqhRegisterNum:"30",//趣花注册人数
+        fydRegisterNum:"3",//房易贷注册人数
+        intercepteRegisterNum:"3",//注册截流数
+        alternationWithZhongYuanNum:"3",//中原交互总数
+        effectiveRegisterNum:"3",//有效注册数
+        mobileAuthenticationNum:"3",//手机认证数
+        cardAuthenticationNum:"3",//银行卡认证数
+        decisionPassNum:"3",//决策通过数
+        drawMoneyNum:"3",//drawMoneyNum
+        drawMoneyPassNum:"3",//提现通过人数
+        signMoneyCount:"3",//签约金额
+        decisionCompletionNum:3,//决策完成数
+        autoCheckNum:3,//电审人数
+        autoCheckPassNum:3//电审通过人数
+      }*/
+
     ],
     columns: [
       {
@@ -132,6 +136,24 @@ const tableData = () => {
         key: 'signMoneyCount',
         visiable:true,
       },
+      {
+        title: '决策完成数',
+        dataIndex: 'decisionCompletionNum',
+        key: 'decisionCompletionNum',
+        visiable:true,
+      },
+      {
+        title: '电审人数',
+        dataIndex: 'autoCheckNum',
+        key: 'autoCheckNum',
+        visiable:true,
+      },
+      {
+        title: '电审通过人数',
+        dataIndex: 'autoCheckPassNum',
+        key: 'autoCheckPassNum',
+        visiable:true,
+      },
     ]
 
   }
@@ -142,7 +164,106 @@ const filterData = () => {
     {
       groupTitle:'授信环节',
       groupId:'creditStep-YunYingRi',
-      haveSelect:false,
+      haveSelect:true,
+      child:[
+        {
+          value:'趣花注册人数',
+          isCheck:true,
+        },
+        {
+          value:'房易贷注册人数',
+          isCheck:true,
+        },
+        {
+          value:'注册截流数',
+          isCheck:true,
+        },
+        {
+          value:'中原交互总数',
+          isCheck:true,
+        },
+        {
+          value:'有效注册数',
+          isCheck:true,
+        },
+        {
+          value:'手机认证数',
+          isCheck:true,
+        },
+        {
+          value:'银行卡认证数',
+          isCheck:true,
+        },
+        {
+          value:'有效注册率',
+          isCheck:true,
+        },
+      ]
+    },
+    {
+      groupTitle:'决策-提现环节',
+      groupId:'withdrawStep-YunYingRi',
+      haveSelect:true,
+      child:[
+        {
+          value:'决策完成率',
+          isCheck:true,
+        },
+        {
+          value:'决策完成数',
+          isCheck:true,
+        },
+        {
+          value:'决策通过数',
+          isCheck:true,
+        },
+        {
+          value:'决策通过率',
+          isCheck:true,
+        },
+        {
+          value:'提现人数',
+          isCheck:true,
+        },
+        {
+          value:'提现率',
+          isCheck:true,
+        },
+        {
+          value:'提现通过人数',
+          isCheck:true,
+        },
+        {
+          value:'电审人数',
+          isCheck:true,
+        },
+        {
+          value:'电审通过人数',
+          isCheck:true,
+        },
+        {
+          value:'电审通过率',
+          isCheck:true,
+        },
+        {
+          value:'签约金额',
+          isCheck:true,
+        },
+        {
+          value:'综合转化率',
+          isCheck:true,
+        },
+      ]
+    }
+  ]
+}
+
+
+const filterData2 = () => {
+  return [
+    {
+      groupTitle:'授信环节',
+      groupId:'creditStep-YunYingRi',
       child:[
         {
           value:'趣花注册人数',
@@ -174,18 +295,17 @@ const filterData = () => {
         },
         {
           value:'有效注册率',
-          isCheck:false,
+          isCheck:true,
         },
       ]
     },
     {
       groupTitle:'决策-提现环节',
       groupId:'withdrawStep-YunYingRi',
-      haveSelect:false,
       child:[
         {
           value:'决策完成率',
-          isCheck:false,
+          isCheck:true,
         },
         {
           value:'决策完成数',
@@ -205,7 +325,7 @@ const filterData = () => {
         },
         {
           value:'提现率',
-          isCheck:false,
+          isCheck:true,
         },
         {
           value:'提现通过人数',
@@ -239,5 +359,6 @@ const filterData = () => {
 
 module.exports = {
   tableData,
-  filterData
+  filterData,
+  filterData2
 }
