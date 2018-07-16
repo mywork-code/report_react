@@ -28,12 +28,14 @@ class OperatingDetail extends PageBase {
       startTime = data.dateStart;
       endTime = data.dateEnd;
       dateType = data.dateType;
+      if(window.appModel && window.appModel.syncCurrentPageDate){
+        window.appModel.syncCurrentPageDate(startTime,endTime,dateType);
+      }
       this.getDataByTime(data.dateStart,data.dateEnd);
     }
   }
 
   getCurTime = () => {
-    console.log('step---------> getCurTime',startTime,endTime)
     return {dateStart:startTime,dateEnd:endTime,dateType:dateType};
   }
 

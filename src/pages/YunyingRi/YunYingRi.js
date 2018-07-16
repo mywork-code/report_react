@@ -5,11 +5,7 @@ import ApassTable from '../../component/ApassTable/ApassTable';
 import ApassFilter from '../../component/ApassFilter/ApassFilter'
 import mock from './mock'
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom'
-import { Toast } from 'antd-mobile';
-
-import ic_explain from '../../images/ic_explain.png'
-import ic_filter from '../../images/ic_filter.png'
+import {Toast} from 'antd-mobile';
 
 const {
   PageBase,
@@ -21,7 +17,8 @@ import ApassTitle from '../../component/ApassTitle/ApassTitle';
 
 var startTime;
 var endTime;
-let dateType = "-7";;
+let dateType = "-7";
+;
 
 class YunYingRi extends PageBase {
   static contextTypes = {
@@ -46,11 +43,11 @@ class YunYingRi extends PageBase {
   }
 
   showExPlain = () => {
-    if(window.appModel){
+    if (window.appModel) {
       let url;
-      if(process.env.NODE_ENV == 'development'){
+      if (process.env.NODE_ENV == 'development') {
         url = "https://report-uat.apass.cn/#/weidu-explain"
-      }else{
+      } else {
         url = "https://report.apass.cn/#/weidu-explain"
       }
       window.appModel.showNewWebPage(url, "维度释义");
@@ -72,7 +69,7 @@ class YunYingRi extends PageBase {
     let hasCheck = 0;
     filterData.map((data, bigIndex) => {
       data.child.map((col, index) => {
-        if(col.isCheck){
+        if (col.isCheck) {
           hasCheck = hasCheck + 1;
         }
         columns.forEach((item, index) => {
@@ -149,7 +146,7 @@ class YunYingRi extends PageBase {
       })
     })
     if (hasCheck > 3) {
-      Toast.info("最多只可选择3项",1);
+      Toast.info("最多只可选择3项", 1);
       child[childIndex].isCheck = !child[childIndex].isCheck;
     }
     this.setState((prevState) => ({
@@ -178,9 +175,9 @@ class YunYingRi extends PageBase {
     })
     return arr;
   }
-  getXAxisData = ()=>{
+  getXAxisData = () => {
     var arr = [];
-    this.state.dataSource.forEach((jsonObj,index)=>{
+    this.state.dataSource.forEach((jsonObj, index) => {
       arr.push(jsonObj.date)
     })
 
@@ -286,77 +283,85 @@ class YunYingRi extends PageBase {
     let date = new Date();
     endTime = this.coverReqTime(date);
     date.setDate(date.getDate() - 6);
-    startTime =this.coverReqTime(date)
-    this.getDataByTime(startTime,endTime);
+    startTime = this.coverReqTime(date)
+    this.getDataByTime(startTime, endTime);
   }
 
-  coverReqTime(date){
-    let month = date.getMonth()+1;
-    month = month < 10 ? "0"+month : month;
+  coverReqTime(date) {
+    let month = date.getMonth() + 1;
+    month = month < 10 ? "0" + month : month;
     let day = date.getDate();
-    day = day < 10 ? "0"+day : day;
-    return [date.getFullYear(),"-",month,"-",day].join("");
+    day = day < 10 ? "0" + day : day;
+    return [date.getFullYear(), "-", month, "-", day].join("");
   }
-  tableDataCover(array,res){
+
+  tableDataCover(array, res) {
     array.push({
       date: this.timestampToDate(res.reportDate),
-      effectiveRegisterPer: res.registerCount==0 ? 0 :  res.zyInvokeSuccessCount/res.registerCount,
-      decisionCompletionPer:res.zyInvokeSuccessCount,
-      decisionPassPer:this.toFloatMethod(res.authFinishPassCal),
-      drawMoneyPer:this.toFloatMethod(res.withdrawApplyCal),
-      autoCheckPer: res.auditWaitCount == 0 ? 0 : res.auditPassCount/res.auditWaitCount,
-      compositePer: res.zyInvokeSuccessCount == 0 ? 0 :  res.auditPassCount/res.zyInvokeSuccessCount,
+      effectiveRegisterPer: res.registerCount == 0 ? 0 : res.zyInvokeSuccessCount / res.registerCount,
+      decisionCompletionPer: res.zyInvokeSuccessCount,
+      decisionPassPer: this.toFloatMethod(res.authFinishPassCal),
+      drawMoneyPer: this.toFloatMethod(res.withdrawApplyCal),
+      autoCheckPer: res.auditWaitCount == 0 ? 0 : res.auditPassCount / res.auditWaitCount,
+      compositePer: res.zyInvokeSuccessCount == 0 ? 0 : res.auditPassCount / res.zyInvokeSuccessCount,
       ajqhRegisterNum: res.registerCount,
       fydRegisterNum: res.zyInvokeSuccessCount,
-      intercepteRegisterNum:res.zyInvokeTotalCount-res.zyInvokeSuccessCount,
-      alternationWithZhongYuanNum:res.zyInvokeTotalCount,
-      effectiveRegisterNum:res.zyInvokeSuccessCount,
-      mobileAuthenticationNum:res.identityAuthCount,
-      cardAuthenticationNum:res.cardAuthCount,
-      decisionPassNum:res.authFinishPass,
-      drawMoneyNum:res.withdrawApply,
-      drawMoneyPassNum:res.withdrawApply-res.withdrawApplyReject,
-      signMoneyCount:res.submitOrderPassTotalAmount,
-      decisionCompletionNum:res.authFinishPass,
-      autoCheckNum:res.auditWaitCount,
-      autoCheckPassNum:res.auditPassCount,
+      intercepteRegisterNum: res.zyInvokeTotalCount - res.zyInvokeSuccessCount,
+      alternationWithZhongYuanNum: res.zyInvokeTotalCount,
+      effectiveRegisterNum: res.zyInvokeSuccessCount,
+      mobileAuthenticationNum: res.identityAuthCount,
+      cardAuthenticationNum: res.cardAuthCount,
+      decisionPassNum: res.authFinishPass,
+      drawMoneyNum: res.withdrawApply,
+      drawMoneyPassNum: res.withdrawApply - res.withdrawApplyReject,
+      signMoneyCount: res.submitOrderPassTotalAmount,
+      decisionCompletionNum: res.authFinishPass,
+      autoCheckNum: res.auditWaitCount,
+      autoCheckPassNum: res.auditPassCount,
     });
   }
-  toFloatMethod = (str)=>{
-    let temp =str.substring(0,str.length-1);
-    console.log(Number(temp)/100)
-    return Number(temp)/100;
+
+  toFloatMethod = (str) => {
+    let temp = str.substring(0, str.length - 1);
+    console.log(Number(temp) / 100)
+    return Number(temp) / 100;
 
   }
-  timestampToDate(times){
-    if(startTime == endTime){
+
+  timestampToDate(times) {
+    if (startTime == endTime) {
       let date = new Date();
       date.setTime(times);
-      return [date.getHours()+1,":","00"].join("");
-    }else {
+      return [date.getHours() + 1, ":", "00"].join("");
+    } else {
       let date = new Date();
       date.setTime(times);
-      return [(date.getMonth()+1),"月",date.getDate(),"日"].join("");
+      return [(date.getMonth() + 1), "月", date.getDate(), "日"].join("");
 
     }
   }
 
   onDateChanged = (data) => {
-    if(data.dateStart != startTime || data.dateEnd != endTime){
+    if (data.dateStart != startTime || data.dateEnd != endTime) {
       startTime = data.dateStart;
       endTime = data.dateEnd;
       dateType = data.dateType;
-      this.getDataByTime(data.dateStart,data.dateEnd);
+      this.getDataByTime(data.dateStart, data.dateEnd);
+      if (window.appModel && window.appModel.syncCurrentPageDate) {
+        window.appModel.syncCurrentPageDate(startTime, endTime, dateType);
+      }
+      console.log(data.dateStart, data.dateEnd);
+      this.getDataByTime(data.dateStart, data.dateEnd);
     }
   }
 
 
   getCurTime = () => {
-    return {dateStart:startTime,dateEnd:endTime,dateType:dateType};
+    return {dateStart: startTime, dateEnd: endTime, dateType: dateType};
   }
 
-  getDataByTime(start,end){
-    if(window.appModel){
+  getDataByTime(start, end) {
+    if (window.appModel) {
       window.appModel.showLoading();
     }
     ApassHttp.post({
@@ -368,24 +373,24 @@ class YunYingRi extends PageBase {
       }
     }, (resp) => {
       console.log(resp)
-      if( window.appModel){
+      if (window.appModel) {
         window.appModel.closeLoading();
       }
       let newDataSource = [];
       resp.map((res) => {
-        this.tableDataCover(newDataSource,res);
+        this.tableDataCover(newDataSource, res);
       });
       this.setState({
-        dataSource:newDataSource,
+        dataSource: newDataSource,
       });
-    },(e) => {
-      if(window.appModel){
+    }, (e) => {
+      if (window.appModel) {
         window.appModel.closeLoading();
       }
     });
   }
 
-  getOption = (legendDataArr, xAxisData,seriesArr) => {
+  getOption = (legendDataArr, xAxisData, seriesArr) => {
     return {
       title: {
         text: "趋势图",
@@ -405,7 +410,7 @@ class YunYingRi extends PageBase {
       },
       legend: {
         // data: ["有效注册率", "决策完成率", "提现率"],//TODO
-        type:'scroll',
+        type: 'scroll',
         data: legendDataArr,
         textStyle: {
           align: "right",
@@ -438,12 +443,12 @@ class YunYingRi extends PageBase {
           }
         },
       },
-      color:['#71afff','#7787d7', '#ffbb6a'],
+      color: ['#71afff', '#7787d7', '#ffbb6a'],
       xAxis: [
         {
           type: "category",
           // data: ["2018-06-30", "2018-07-01", "2018-07-02", "2018-07-03", "2018-07-04", "2018-07-05", "2018-07-06"],
-          data:xAxisData,
+          data: xAxisData,
           axisLine: {
             show: false
           },

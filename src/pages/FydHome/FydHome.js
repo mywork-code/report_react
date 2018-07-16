@@ -21,7 +21,7 @@ const tabData = [
   // {title:"用户属性分析表"},
 ];
 
-var activeKeyIndex = 1;
+var activeKeyIndex = 0;
 var defaultTime
 var pages;
 
@@ -63,6 +63,7 @@ class FydHome extends PageBase {
       }else{
         time = defaultTime;
       }
+
       if(time){
         window.appModel.syncCurrentPageDate(time.dateStart,time.dateEnd,time.dateType);
       }
