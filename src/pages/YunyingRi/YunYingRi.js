@@ -438,7 +438,7 @@ class YunYingRi extends PageBase {
           }
         },
       },
-      calculable: true,
+      color:['#71afff','#7787d7', '#ffbb6a'],
       xAxis: [
         {
           type: "category",
@@ -446,7 +446,10 @@ class YunYingRi extends PageBase {
           data:xAxisData,
           axisLine: {
             show: false
-          }
+          },
+          splitLine: {
+            show: true
+          },
         }
       ],
       grid: {
@@ -471,6 +474,12 @@ class YunYingRi extends PageBase {
           min: 0,
           nameTextStyle: {
             baseline: "middle"
+          },
+          splitLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
           }
         },
         {
@@ -490,6 +499,12 @@ class YunYingRi extends PageBase {
           },
           nameTextStyle: {
             align: "center"
+          },
+          splitLine: {
+            show: true
+          },
+          axisTick: {
+            show: false
           }
         }
       ],
