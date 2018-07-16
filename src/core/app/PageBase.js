@@ -9,7 +9,6 @@ class PageBase extends React.Component {
 
   // 向前跳转
   forward(viewPath, options) {
-    debugger
     let myViewPath = null;
     if (!viewPath) {
       console.error('should set forward viewpath.');

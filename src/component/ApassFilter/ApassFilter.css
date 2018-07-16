@@ -1,33 +1,22 @@
 
-.popvover{
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.48);
+.apass-filter-modal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
-.content{
-  position: absolute;
-  left: 50%;
-  top:50%;
-  transform: translate(-50%,-50%);
-  width: 80%;
-  background: #fff;
-  border-radius: 8px;
-
+.apass-filter-content{
 }
 
-.group{
+.apass-filter-group{
   overflow: hidden;
   overflow-y: scroll;
   max-height: 400px;
 }
 
 
-.title{
+.apass-filter-title{
   height: 44px;
   display: -webkit-flex;
   display: flex;
@@ -38,22 +27,22 @@
   padding: 0 12px;
 }
 
-.title span:first-child{
+.apass-filter-title span:first-child{
   color: #303030;
   font-size: 14px;
 }
 
-.title span:nth-child(2){
+.apass-filter-title span:nth-child(2){
   color: #303030;
   font-size: 16px;
 }
 
-.title span:last-child{
+.apass-filter-title span:last-child{
   color: #303030;
   font-size: 14px;
 }
 
-.cell-box{
+.apass-filter-cell-box{
   height: 40px;
   border-bottom: 1px solid rgba(0,0,0,0.08);
   display: -webkit-flex;
@@ -62,19 +51,19 @@
   align-items: center;
 }
 
-.cell-con{
+.apass-filter-cell-con{
   margin-left: 12px;
   font-size: 14px;
   color: #303030;
 }
 
-.cell-checkbox{
+.apass-filter-cell-checkbox{
   width: 17px;
   height: 17px;
   margin-left: 12px;
 }
 
-.filter-box{
+.apass-filter-filter-box{
   height: 36px;
   background: #F9F9F9;
   display: -webkit-flex;
@@ -85,14 +74,14 @@
   padding: 0 12px;
 }
 
-.filter-box span:first-child{
+.apass-filter-title-name{
   font-size: 15px;
   color: #303030;
   font-weight: 700;
 }
 
 
-.filter-box span:last-child{
+.apass-filter-title-select{
   font-size: 14px;
   color: #71AFFF;
 }

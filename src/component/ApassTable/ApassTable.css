@@ -1,11 +1,21 @@
 
-.table-box{
-  width: 100%;
-  overflow-x: scroll;
+.apass-table-wrapper{
   white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
-.cell{
+.apass-table-box{
+  width: 10000px;
+}
+
+.apass-table-cloumn{
+  float: left;
+  text-align: center;
+}
+
+.apass-table-cell{
   display: block;
   color: #303030;
   font-size:15px;
@@ -13,13 +23,4 @@
   min-width: 45px;
   height: 44px;
   padding: 0 30px;
-}
-
-.big-box{
-  width: 10000px;
-}
-
-.cloumn{
-  float: left;
-  text-align: center;
 }

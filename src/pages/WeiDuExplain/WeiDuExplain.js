@@ -1,12 +1,14 @@
 import React from 'react';
 import AyoBase from '../../core';
 import './WeiDuExplain.css';
-import {Table} from 'antd';
 import {getColumns,getDataSource,getPagination,getDataSource2} from './mock'
 
 const {
   PageBase,
 } = AyoBase;
+
+
+
 
 class WeiDuExplain extends PageBase {
   constructor(){
@@ -21,12 +23,23 @@ class WeiDuExplain extends PageBase {
 
 
   render() {
+
+    const columns1 = getDataSource().map((data,index) => <li className="weidu-item" key={index}>{data.name+"：" +data.mean}</li>);
+
+    const columns2 = getDataSource2().map((data,index) => <li className="weidu-item" key={index}>{data.name+"：" +data.mean}</li>);
+
+
     return (
-      <div style={{background:'#ffffff'}}>
-        <Table dataSource={this.state.dataSource} columns={this.state.columns}
-               pagination={getPagination()}/>
-        <Table dataSource={this.state.dataSource2} columns={this.state.columns2}
-               pagination={getPagination()}/>
+      <div className="weidu-box">
+        <p className="weidu-title">授信环节</p>
+          {
+            columns1
+          }
+        <p className="weidu-line"></p>
+        <p className="weidu-title"> 决策-提现环节</p>
+          {
+            columns2
+          }
       </div>
     )
   }

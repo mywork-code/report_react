@@ -1,41 +1,27 @@
 import React from 'react';
 import AyoBase from '../../core/index';
 import './YunYingRi.css';
-import {Row, Col, Modal} from 'antd'
 import ApassTable from '../../component/ApassTable/ApassTable';
 import ApassFilter from '../../component/ApassFilter/ApassFilter'
 import mock from './mock'
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom'
+import { Toast } from 'antd-mobile';
 
-import ic_explain from '../../imgs/ic_explain.png'
-import ic_filter from '../../imgs/ic_filter.png'
+import ic_explain from '../../images/ic_explain.png'
+import ic_filter from '../../images/ic_filter.png'
 
 const {
   PageBase,
 } = AyoBase;
 import ReactEcharts from 'echarts-for-react';
-import HttpClient from "../../core/http/HttpClient";
-import ApassFilter2 from "../../component/ApassFilter2";
 import {ApassHttp, Apis} from "../../core";
+
+import ApassTitle from '../../component/ApassTitle/ApassTitle';
 
 var startTime;
 var endTime;
-
-class AreaTitle extends React.Component{
-  render(){
-    return (<div className="title">
-        < img src={ic_explain} onClick={() => {
-         this.props.leftClick()
-        }}></img>
-        <span className="title-text">{this.props.title}</span>
-        < img src={ic_filter} onClick={() => {
-          this.props.rightClick()
-        }}></img>
-      </div>
-    );
-  }
-}
+let dateType = "-7";;
 
 class YunYingRi extends PageBase {
   static contextTypes = {
@@ -60,7 +46,15 @@ class YunYingRi extends PageBase {
   }
 
   showExPlain = () => {
-    this.context.router.history.push("/weidu-explain")
+    if(window.appModel){
+      let url;
+      if(process.env.NODE_ENV == 'development'){
+        url = "https://report-uat.apass.cn/#/weidu-explain"
+      }else{
+        url = "https://report.apass.cn/#/weidu-explain"
+      }
+      window.appModel.showNewWebPage(url, "维度释义");
+    }
   }
 
   showFilter = () => {
@@ -155,10 +149,7 @@ class YunYingRi extends PageBase {
       })
     })
     if (hasCheck > 3) {
-      Modal.warning({
-        title: '警告',
-        content: '最多只可选择3项',
-      });
+      Toast.info("最多只可选择3项",1);
       child[childIndex].isCheck = !child[childIndex].isCheck;
     }
     this.setState((prevState) => ({
@@ -170,6 +161,11 @@ class YunYingRi extends PageBase {
   filterCancel2 = () => {
     this.setState({filterVisiable2: false});
   }
+
+  filterGroupSelectAll2 = () => {
+
+  }
+
 
   getLegendDataArr = () => {
     var arr = [];
@@ -349,8 +345,14 @@ class YunYingRi extends PageBase {
     if(data.dateStart != startTime || data.dateEnd != endTime){
       startTime = data.dateStart;
       endTime = data.dateEnd;
+      dateType = data.dateType;
       this.getDataByTime(data.dateStart,data.dateEnd);
     }
+  }
+
+
+  getCurTime = () => {
+    return {dateStart:startTime,dateEnd:endTime,dateType:dateType};
   }
 
   getDataByTime(start,end){
@@ -537,34 +539,29 @@ class YunYingRi extends PageBase {
   render() {
     return (
       <div className='yunying-grap'>
-        <Row>
-          <Col span={24}>
-            <div>
-              <ReactEcharts
-                option={this.getOption(this.getLegendDataArr(), this.getXAxisData(), this.getSeriesArr())}
-                style={{height: '450px', weight: '676px'}}
-              />
-              <AreaTitle title="各地区用户业务转化监控" leftClick={this.showExPlain.bind(this)} rightClick={this.showFilter}/>
-              <ApassFilter title="维度指标配置" filterData={this.state.filterData}
-                           visiable={this.state.filterVisiable}
-                           filterCancel={this.filterCancel}
-                           filterComplete={this.filterComplete}
-                           filterCellClick={this.filterCellClick}
-                           filterGroupSelectAll={this.filterGroupSelectAll}
-              />
+        <ReactEcharts
+          option={this.getOption(this.getLegendDataArr(), this.getXAxisData(), this.getSeriesArr())}
+          style={{height: '450px', weight: '676px'}}
+        />
+        <ApassTitle title="各地区用户业务转化监控" leftClick={this.showExPlain.bind(this)} rightClick={this.showFilter}/>
+        <ApassFilter title="维度指标配置" filterData={this.state.filterData}
+                     visiable={this.state.filterVisiable}
+                     filterCancel={this.filterCancel}
+                     filterComplete={this.filterComplete}
+                     filterCellClick={this.filterCellClick}
+                     filterGroupSelectAll={this.filterGroupSelectAll}
+        />
 
-              <ApassFilter2 title="维度指标配置" filterData={this.state.filterData2}
-                            visiable={this.state.filterVisiable2}
-                            filterCancel={this.filterCancel2}
-                            filterComplete={this.filterComplete2}
-                            filterCellClick={this.filterCellClick2}
-              />
+        <ApassFilter title="维度指标配置" filterData={this.state.filterData2}
+                     visiable={this.state.filterVisiable2}
+                     filterCancel={this.filterCancel2}
+                     filterComplete={this.filterComplete2}
+                     filterCellClick={this.filterCellClick2}
+                     filterGroupSelectAll={this.filterGroupSelectAll2}
+                     show
+        />
 
-              <ApassTable dataSource={this.state.dataSource} columns={this.state.columns}/>
-            </div>
-
-          </Col>
-        </Row>
+        <ApassTable dataSource={this.state.dataSource} columns={this.state.columns} fixedFirstColums={true}/>
       </div>
     )
   }

@@ -1,22 +1,29 @@
 import React from 'react';
 import AyoBase from '../../core';
 import './FydHome.css';
-import {Tabs} from 'antd'
 import YunYingRi from "../YunyingRi/YunYingRi";
 import Area from "../viewArea/Area"
 import UserAttr from "../UserAttr/UserAttr"
 import OperatingDetail from "../OperatingDetail/OperatingDetail"
 import PropTypes from 'prop-types';
 
+import { Tabs } from 'antd-mobile';
 
-const TabPane = Tabs.TabPane;
 
 const {
   PageBase,
 } = AyoBase;
 
+const tabData = [
+  {title:"运营日报表"},
+  {title:"地区监控表"},
+  {title:"运营明细表"},
+  // {title:"用户属性分析表"},
+];
+
 var activeKeyIndex = 1;
-var defaultTime;
+var defaultTime
+var pages;
 
 class FydHome extends PageBase {
   constructor() {
@@ -24,15 +31,12 @@ class FydHome extends PageBase {
     this.state = {}
     this.area = React.createRef();
     this.ribao = React.createRef();
+    this.operating = React.createRef();
+    pages = [this.ribao,this.area,this.operating];
     window.onDateChanged = function (data) {
-      if(activeKeyIndex == 2){
-        console.log(data)
-        this.area.current.onDateChanged(data);
-      }else if(activeKeyIndex == 1){
-        console.log(data)
-        if(this.ribao && this.ribao.current){
-          this.ribao.current.onDateChanged(data);
-        }
+      let curPage = pages[activeKeyIndex];
+      if(curPage.current && curPage.current.onDateChanged){
+        curPage.current.onDateChanged(data);
       }
     };
     window.onDateChanged = window.onDateChanged.bind(this);
@@ -41,30 +45,29 @@ class FydHome extends PageBase {
     let endTime = this.coverReqTime(date);
     date.setDate(date.getDate() - 6);
     let startTime =this.coverReqTime(date)
-    defaultTime = {startTime:startTime,endTime:endTime}
+    defaultTime = {dateStart:startTime,dateEnd:endTime,dateType:"-7"};
   }
 
   componentWillMount() {
-    // console.log(this.getQuery())
   }
 
-  handleModeChange = (activeKey) => {
+  handleModeChange = (tab,activeKey) => {
     activeKeyIndex = activeKey;
-    if(activeKeyIndex == 2 || activeKeyIndex == 1){
-      if(window.appModel){
-        if(this.area.current){
-          let areaTime = this.area.current.getCurTime()
-          window.appModel.syncCurrentPageDate(areaTime.dateStart,areaTime.dateEnd)
-        }else{
-          window.appModel.syncCurrentPageDate(defaultTime.startTime,defaultTime.endTime)
-        }
+    let time;
+    if(window.appModel && window.appModel.syncCurrentPageDate){
+
+      let curPage = pages[activeKeyIndex];
+
+      if(curPage.current && curPage.current.getCurTime){
+        time = curPage.current.getCurTime();
+      }else{
+        time = defaultTime;
       }
+      if(time){
+        window.appModel.syncCurrentPageDate(time.dateStart,time.dateEnd,time.dateType);
+      }
+
     }
-    // //存储数据至本地
-    // BenefitData.set({a: 1, b: 2});
-    //
-    // //从本地获取数据
-    // console.log(BenefitData.get());
   }
 
 
@@ -79,20 +82,17 @@ class FydHome extends PageBase {
   render() {
     return (
       <div>
-        <Tabs onChange={this.handleModeChange}
-              defaultActiveKey="1"
-              tabBarStyle={{marginBottom:0}}
+        <Tabs onChange={this.handleModeChange.bind(this)}
+              tabs={tabData} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3} />}
+              swipeable={false}
+              tabBarActiveTextColor="#71AFFF"
+              tabBarInactiveTextColor="#303030"
+              tabBarUnderlineStyle={{borderColor:"#71AFFF"}}
+              animated={false}
         >
-          <TabPane tab="运营日报表" key="1">
             <YunYingRi ref={this.ribao}/>
-          </TabPane>
-          <TabPane tab="地区监控表" key="2">
             <Area ref={this.area}/>
-          </TabPane>
-          <TabPane tab="运营明细表" key="3"><OperatingDetail/></TabPane>
-          <TabPane tab="用户属性分析表" key="4">
-            <UserAttr/>
-          </TabPane>
+            <OperatingDetail ref={this.operating}/>
         </Tabs>
       </div>
     )

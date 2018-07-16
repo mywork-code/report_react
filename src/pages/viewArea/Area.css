@@ -1,34 +1,10 @@
-.area-box {
+.view-area-box {
+  position: relative;
   background: #fff;
 }
 
-.map {
+.view-area-map {
   border-bottom: 12px solid #F4F4F4;
 }
 
-.title {
-  height: 44px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
 
-.title-text {
-  color: #484848;
-  font-size: 16px;
-}
-
-.title img:first-child {
-  width: 18px;
-  height: 18px;
-  margin-left: 12px;
-}
-
-.title img:last-child{
-  width: 18px;
-  height: 19px;
-  margin-right: 12px;
-}

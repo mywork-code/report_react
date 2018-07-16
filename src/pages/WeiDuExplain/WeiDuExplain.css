@@ -1,2 +1,30 @@
-.titleClass{
+.weidu-box{
+  background: #ffffff;
+  width: 100%;
 }
+
+.weidu-title{
+  height: 40px;
+  font-size: 15px;
+  color:#303030;
+  line-height: 40px;
+  border-bottom: 1px solid #F4F4F4;
+  padding-left: 12px;
+  font-weight: 700;
+}
+
+.weidu-item{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #484848;
+  border-bottom: 1px solid #F4F4F4;
+  padding: 0 12px;
+  background: #ffffff;
+}
+
+.weidu-line{
+  border-top: 12px solid #F4F4F4;
+}
+

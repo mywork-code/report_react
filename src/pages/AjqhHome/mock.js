@@ -1,7 +1,5 @@
-
-
 const mockOption = () =>{
-console.log(window.localStorage.getItem("formData"))
+
     return {
               //图表的标题
                 title: {
@@ -9,7 +7,7 @@ console.log(window.localStorage.getItem("formData"))
                 },
                 //图表展示的类别，这里的data和series中得name对应
                 legend: {
-                    data: ['飞豹贷', '熊猫贷款','淘钱宝'],
+                    data: [],
                     textStyle: {
                        fontSize:"12px" // 用 legend.textStyle.fontSize 更改示例大小
                     }      
@@ -22,7 +20,7 @@ console.log(window.localStorage.getItem("formData"))
                 xAxis: [{
                     type: 'category',
                     boundaryGap: false,//这里表示是否补齐空白
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    data: [],
                     axisLabel:{
                         fontSize:"12px"
                     }
@@ -39,7 +37,7 @@ console.log(window.localStorage.getItem("formData"))
                 //图表类型，type表示按照什么类型图表显示，line代表折线，下面的内容与
                 //legend一一对应
                 series: [{
-                        name: '飞豹贷',
+                        name: '',
                         type: 'line',
                         smooth: true,
                         symbol:'circle',
@@ -51,10 +49,10 @@ console.log(window.localStorage.getItem("formData"))
                                 color: "#71AFFF"
                             }
                         },
-                        data:window.localStorage.getItem("formData"),
+                        data:[],
        
                     }, {
-                        name: '熊猫贷款',
+                        name: '',
                         type: 'line',
                         smooth: true,
                         symbol:'circle',
@@ -67,11 +65,11 @@ console.log(window.localStorage.getItem("formData"))
                             }
                         },
                         data: [
-                           820, 932, 901, 934, 1290, 1330, 1320
+                    
                         ]
                     },
                     {
-                        name: '淘钱宝',
+                        name: '',
                         type: 'line',
                         smooth: true,
                         symbol:'circle',
@@ -84,7 +82,7 @@ console.log(window.localStorage.getItem("formData"))
                             }
                         },
                         data: [
-                           100, 100, 100, 934, 1290, 1330, 1320
+                        
                         ]
                     }
 
@@ -94,41 +92,71 @@ console.log(window.localStorage.getItem("formData"))
 }
 const tableDate = () => {
   return {
-    dataSource: [
+    dataSource: [],
+    operatioSource: [
       {
         date: '5月1号',
-        source: '258',
-        registerNum:'27',
-        product:"135",
-        clickNum:'369'
-
+        regNumber: '258',
+        actNumber:'27',
+        orderPeople:"135",
+        orederGoods:'369',
+        orederMoney:'5000',
+        payPeople:'12',
+        payGoods:'8888',
+        payMoney:'4555',
+        payRate:'0.05%'
       },
       {
         date: '5月2号',
-        source: '258',
-        registerNum:'27',
-        product:"135",
-        clickNum:'369'
-
+        regNumber: '258',
+        actNumber:'27',
+        orderPeople:"135",
+        orederGoods:'369',
+        orederMoney:'5000',
+        payPeople:'12',
+        payGoods:'8888',
+        payMoney:'4555',
+        payRate:'0.05%'
       },
       {
         date: '5月3号',
-        source: '258',
-        registerNum:'27',
-        product:"135",
-        clickNum:'369'
-
+        regNumber: '258',
+        actNumber:'27',
+        orderPeople:"135",
+        orederGoods:'369',
+        orederMoney:'5000',
+        payPeople:'12',
+        payGoods:'8888',
+        payMoney:'4555',
+        payRate:'0.05%'
       },
       {
         date: '5月4号',
-        source: '258',
-        registerNum:'27',
-        product:"135",
-        clickNum:'369'
+        regNumber: '258',
+        actNumber:'27',
+        orderPeople:"135",
+        orederGoods:'369',
+        orederMoney:'5000',
+        payPeople:'12',
+        payGoods:'8888',
+        payMoney:'4555',
+        payRate:'0.05%'
+      },
+      {
+        date: '5月5号',
+        regNumber: '258',
+        actNumber:'27',
+        orderPeople:"135",
+        orederGoods:'369',
+        orederMoney:'5000',
+        payPeople:'12',
+        payGoods:'8888',
+        payMoney:'4555',
+        payRate:'0.05%'
+      },
 
-      },            
-     
-    ],
+      
+    ],    
     columns: [
       {
         title: '日期',
@@ -160,10 +188,72 @@ const tableDate = () => {
         key: 'clickNum',
         visiable:true
       }
+    ],
+    operatioColumns: [
+      {
+        title: '日期',
+        dataIndex: 'date',
+        key: 'date',
+        visiable:true,
+      },
+      {
+        title: '注册用户数',
+        dataIndex: 'regNumber',
+        key: 'regNumber',
+        visiable:true,
+      },
+      {
+        title: '活跃用户数',
+        dataIndex: 'actNumber',
+        key: 'actNumber',
+        visiable:true,
+      },
+      {
+        title: '下单人数',
+        dataIndex: 'orderPeople',
+        key: 'orderPeople',
+        visiable:true,
+      },
+      {
+        title: '下单商品件数',
+        dataIndex: 'orederGoods',
+        key: 'orederGoods',
+        visiable:true
+      },
+      {
+        title: '下单金额',
+        dataIndex: 'orederMoney',
+        key: 'orederMoney',
+        visiable:true
+      },
+      {
+        title: '支付人数',
+        dataIndex: 'payPeople',
+        key: 'payPeople',
+        visiable:true
+      },
+      {
+        title: '支付商品件数',
+        dataIndex: 'payGoods',
+        key: 'payGoods',
+        visiable:true
+      },
+      {
+        title: '支付金额',
+        dataIndex: 'payMoney',
+        key: 'payMoney',
+        visiable:true
+      },      
+      {
+        title: '支付下单转化率',
+        dataIndex: 'payRate',
+        key: 'payRate',
+        visiable:true
+      },   
 
 
+    ],
 
-    ]
 
   }
 }
@@ -174,32 +264,6 @@ const filterData = () => {
       groupId:'productStep',
       haveSelect:true,
       child:[
-        {
-          value:'熊猫贷款',
-          isCheck:true,
-        },
-        {
-          value:'秒易花',
-          isCheck:true,
-        },
-        {
-          value:'借云',
-          isCheck:true,
-        },
-        {
-          value:'康乐享',
-          isCheck:true,
-        },
-        {
-          value:'淘钱宝',
-          isCheck:true,
-        },
-        {
-          value:'花花白卡',
-          isCheck:true,
-        }
-
-
       ]
     }
   ]
@@ -208,53 +272,15 @@ const filterAllData = () => {
   return [
     {
       groupTitle:'产品筛选',
-      groupId:'withdrawStep',
+      groupId:'productStep',
       haveSelect:true,
-      child:[
-        {
-          value:'熊猫贷款',
-          isCheck:true,
-        },
-        {
-          value:'秒易花',
-          isCheck:true,
-        },
-        {
-          value:'借云',
-          isCheck:true,
-        },
-        {
-          value:'康乐享',
-          isCheck:true,
-        },
-        {
-          value:'淘钱宝',
-          isCheck:true,
-        },
-        {
-          value:'花花白卡',
-          isCheck:true,
-        }
-
-      ]
+      child:[]
     },
     {
       groupTitle:'渠道筛选',
-      groupId:'withdrawStep',
+      groupId:'channelStep',
       haveSelect:true,
       child:[
-        {
-          value:'今日头条',
-          isCheck:true,
-        },
-        {
-          value:'百度',
-          isCheck:true,
-        },
-        {
-          value:'360',
-          isCheck:true,
-        }
       ]
     }
   ]

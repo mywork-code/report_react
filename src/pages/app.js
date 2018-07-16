@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MediaQuery from 'react-responsive';
-import 'antd/dist/antd.css';
 
 import {
   HashRouter as Router,
@@ -10,11 +9,9 @@ import {
 import AyoBase from '../core';
 import '../../public/css/reset.css';
 import '../../public/font/iconfont.css';
-import Home from './Home/Home';
 import FydHome from "./FydHome";
 import AjqhHome from "./AjqhHome";
 import OperatingDetail from "./OperatingDetail";
-import Area from "./viewArea/Area";
 import WeiDuExplain from "./WeiDuExplain";
 
 const {
@@ -26,8 +23,7 @@ const App = () => {
     <Router>
       <AppContainer>
         <MediaQuery query="(min-device-width: 1224px)">
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/home" component={Home}/>
+          <Route exact path="/" component={FydHome}/>
           <Route exact path="/fyd-home" component={FydHome}/>
           <Route exact path="/ajqh-home" component={AjqhHome}/>
           <Route exact path="/operating-detail" component={OperatingDetail}/>
@@ -35,8 +31,7 @@ const App = () => {
         </MediaQuery>
 
         <MediaQuery query="(max-device-width: 1224px)">
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/home" component={Home}/>
+          <Route exact path="/" component={FydHome}/>
           <Route exact path="/fyd-home" component={FydHome}/>
           <Route exact path="/ajqh-home" component={AjqhHome}/>
           <Route exact path="/operating-detail" component={OperatingDetail}/>
@@ -46,4 +41,5 @@ const App = () => {
     </Router>)
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+
+ReactDOM.render(<App />, document.getElementById('root'));

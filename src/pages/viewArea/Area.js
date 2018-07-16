@@ -5,32 +5,20 @@ import "./Area.css";
 import mock from './mock';
 import ApassTable from '../../component/ApassTable/ApassTable';
 import ApassFilter from '../../component/ApassFilter/ApassFilter';
+import ApassTitle from '../../component/ApassTitle/ApassTitle';
 import {Apis, ApassHttp} from '../../core/index';
 
-import ic_explain from '../../imgs/ic_explain.png';
-import ic_filter from '../../imgs/ic_filter.png';
+
 
 require('echarts/map/js/china.js');
 
 
 const {PageBase} = AyoBase;
 
-class AreaTitle extends React.Component {
-
-  render() {
-    return (
-      <div className="title">
-        <img src={ic_explain} onClick={this.props.leftClick}></img>
-        <span className="title-text">{this.props.title}</span>
-        <img src={ic_filter} onClick={this.props.rightClick}></img>
-      </div>
-    );
-  }
-
-}
 
 let startTime;
 let endTime;
+let dateType = "-7";
 
 class Area extends PageBase {
 
@@ -51,14 +39,13 @@ class Area extends PageBase {
     if(data.dateStart != startTime || data.dateEnd != endTime){
       startTime = data.dateStart;
       endTime = data.dateEnd;
+      dateType = data.dateType;
       this.getDataByTime(data.dateStart,data.dateEnd);
     }
   }
 
   getCurTime = () => {
-
-    return {dateStart:startTime,dateEnd:endTime};
-
+    return {dateStart:startTime,dateEnd:endTime,dateType:dateType};
   }
 
   componentDidMount() {
@@ -191,7 +178,15 @@ class Area extends PageBase {
 
 
   showExPlain = () => {
-
+      if(window.appModel){
+        let url;
+        if(process.env.NODE_ENV == 'development'){
+          url = "https://report-uat.apass.cn/#/weidu-explain"
+        }else{
+          url = "https://report.apass.cn/#/weidu-explain"
+        }
+        window.appModel.showNewWebPage(url, "维度释义");
+      }
   }
 
   showFilter = () => {
@@ -211,7 +206,6 @@ class Area extends PageBase {
       if (bigIndex != 0) {
         offset = filterData[bigIndex - 1].child.length
       }
-      debugger
       data.child.map((col, index) => {
         columns[index + offset + 1].visiable = col.isCheck;
       })
@@ -259,13 +253,13 @@ class Area extends PageBase {
 
   render() {
     return (
-      <div className="area-box">
+      <div className="view-area-box">
         <ReactEcharts
           option={this.state.option}
-          className='map'/>
+          className='view-area-map'/>
 
-        <AreaTitle title="各地区用户业务转化监控" leftClick={this.showExPlain} rightClick={this.showFilter}/>
-        <ApassTable dataSource={this.state.dataSource} columns={this.state.columns}/>
+        <ApassTitle title="各地区用户业务转化监控" leftClick={this.showExPlain} rightClick={this.showFilter}/>
+        <ApassTable dataSource={this.state.dataSource} columns={this.state.columns} fixedFirstColums={true}/>
         <ApassFilter title="维度指标配置" filterData={this.state.filterData}
                      visiable={this.state.filterVisiable}
                      filterCancel={this.filterCancel}

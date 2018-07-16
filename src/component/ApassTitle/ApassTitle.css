@@ -1,0 +1,26 @@
+.apass-title {
+  height: 44px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.apass-title-text {
+  color: #484848;
+  font-size: 16px;
+}
+
+.apass-title img:first-child {
+  width: 18px;
+  height: 18px;
+  margin-left: 12px;
+}
+
+.apass-title img:last-child{
+  width: 18px;
+  height: 19px;
+  margin-right: 12px;
+}
